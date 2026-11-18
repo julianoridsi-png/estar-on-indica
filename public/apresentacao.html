@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estar On Indica — Apresentação</title>
+<style>
+  :root {
+    --lime: #D2DD3A;
+    --graphite: #31393F;
+    --gray: #f4f5fa;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--graphite); color: #fff; overflow: hidden; }
+  .deck { height: 100vh; width: 100vw; position: relative; }
+  .slide { position: absolute; inset: 0; display: none; padding: 60px 80px; flex-direction: column; justify-content: center; }
+  .slide.active { display: flex; }
+  .slide h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+  .slide h2 { font-size: 2.4rem; font-weight: 700; margin-bottom: 16px; }
+  .slide h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; color: var(--lime); }
+  .slide p { font-size: 1.25rem; line-height: 1.6; max-width: 900px; opacity: 0.9; }
+  .slide ul { font-size: 1.2rem; line-height: 1.8; max-width: 900px; padding-left: 24px; }
+  .slide li { margin-bottom: 8px; }
+  .accent { color: var(--lime); }
+  .badge { display: inline-block; background: var(--lime); color: var(--graphite); padding: 6px 16px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; margin-bottom: 24px; }
+  .card { background: rgba(255,255,255,0.08); border: 1px solid rgba(210,221,58,0.3); border-radius: 16px; padding: 28px; margin-top: 20px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; max-width: 1100px; }
+  .stat { font-size: 3rem; font-weight: 800; color: var(--lime); }
+  .footer-nav { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
+  .footer-nav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; }
+  .footer-nav button:hover { background: var(--lime); color: var(--graphite); }
+  .counter { position: fixed; top: 24px; right: 32px; font-size: 0.9rem; opacity: 0.6; z-index: 10; }
+  .logo-img { height: 48px; width: auto; margin-bottom: 32px; }
+  .seal { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #D2DD3A, #b8c432); color: #31393F; padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 1rem; margin-top: 24px; }
+  .hero-bg { background: linear-gradient(135deg, #31393F 0%, #1a1f23 100%); }
+  .green-bg { background: linear-gradient(135deg, #D2DD3A 0%, #b8c432 100%); color: #31393F; }
+  .white-bg { background: #ffffff; color: #31393F; }
+  .white-bg h1, .white-bg h2, .white-bg h3 { color: #31393F; }
+  .white-bg p, .white-bg li { color: #555; }
+  @media (max-width: 768px) {
+    .slide { padding: 40px 24px; }
+    .slide h1 { font-size: 2rem; }
+    .slide h2 { font-size: 1.6rem; }
+    .grid2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- Slide 1: Capa -->
+  <div class="slide active hero-bg">
+    <img class="logo-img" src="/branding/logo-extracted.png" alt="Estar On" />
+    <span class="badge">Apresentação Institucional</span>
+    <h1>Estar On <span class="accent">Indica</span></h1>
+    <p>O programa de indicação oficial da Estar On Internet. Indique amigos, acompanhe cada etapa e seja recompensado.</p>
+    <div class="seal">🔒 Aplicativo Proprietário & Seguro</div>
+  </div>
+
+  <!-- Slide 2: O que é -->
+  <div class="slide hero-bg">
+    <span class="badge">O que é</span>
+    <h2>Um aplicativo de indicação completo</h2>
+    <p>O Estar On Indica é uma plataforma web (PWA) desenvolvida exclusivamente para a Estar On Internet, que permite que clientes indiquem amigos e acompanhem todo o processo até a instalação.</p>
+    <div class="card">
+      <h3>Diferencial</h3>
+      <p>Não é um sistema genérico. É um aplicativo <strong>proprietário</strong>, com identidade visual oficial, banco de dados próprio e segurança de nível empresarial.</p>
+    </div>
+  </div>
+
+  <!-- Slide 3: Funcionalidades -->
+  <div class="slide hero-bg">
+    <span class="badge">Funcionalidades</span>
+    <h2>Tudo em um só lugar</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Para o Indicador</h3>
+        <ul>
+          <li>Cadastro em 3 etapas (dados, endereço, acesso)</li>
+          <li>Painel com KPIs em tempo real</li>
+          <li>Cadastro de indicações com ViaCEP</li>
+          <li>Chave PIX criptografada para recebimento</li>
+          <li>Acompanhamento de recompensas</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Para o Gestor</h3>
+        <ul>
+          <li>Dashboard com gráficos e ranking</li>
+          <li>Gestão de indicações e status</li>
+          <li>Gestão de indicadores e chaves PIX</li>
+          <li>Controle de recompensas e campanhas</li>
+          <li>Relatórios e auditoria</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Banco de dados -->
+  <div class="slide hero-bg">
+    <span class="badge">Tecnologia</span>
+    <h2>Banco de dados robusto e seguro</h2>
+    <p>PostgreSQL via Supabase, com Row Level Security (RLS) em todas as tabelas. CPF sempre criptografado (AES-256 via Vault). Nenhum dado sensível é exposto.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Estrutura</h3>
+        <ul>
+          <li>profiles, referrals, rewards</li>
+          <li>payout_accounts (PIX criptografado)</li>
+          <li>referral_history (auditoria de status)</li>
+          <li>audit_logs (rastreabilidade)</li>
+          <li>settings (configuração da campanha)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Segurança no banco</h3>
+        <ul>
+          <li>RLS ativo em todas as tabelas</li>
+          <li>CPF cifrado com chave no Vault</li>
+          <li>Funções RPC com security definer</li>
+          <li>Permissões por papel (RBAC)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Segurança -->
+  <div class="slide hero-bg">
+    <span class="badge">Segurança</span>
+    <h2>Proteção de nível empresarial</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Autenticação & Autorização</h3>
+        <ul>
+          <li>Supabase Auth (e-mail/senha)</li>
+          <li>Rotas protegidas por middleware</li>
+          <li>RBAC: admin, comercial, indicador</li>
+          <li>Sessões com expiração</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Proteção de dados (LGPD)</h3>
+        <ul>
+          <li>CPF mascarado nas telas</li>
+          <li>Consentimento registrado</li>
+          <li>Termos e privacidade versionados</li>
+          <li>Auditoria de operações</li>
+        </ul>
+      </div>
+    </div>
+    <div class="seal">🔒 LGPD Compliant & Auditado</div>
+  </div>
+
+  <!-- Slide 6: Status e automação -->
+  <div class="slide hero-bg">
+    <span class="badge">Automação</span>
+    <h2>Fluxo completo e automatizado</h2>
+    <p>Recompensas são geradas automaticamente quando uma indicação é marcada como <strong>instalada</strong>. O gestor acompanha tudo em tempo real.</p>
+    <div class="card">
+      <h3>Status da indicação</h3>
+      <p style="font-size:1rem; opacity:0.8;">Indicação recebida → Em análise → Atendemos a região → Contrato aprovado → Instalação agendada → Instalado → Recompensa gerada → Pagamento via PIX</p>
+    </div>
+    <div class="seal">⚡ Automação inteligente</div>
+  </div>
+
+  <!-- Slide 7: Tecnologia -->
+  <div class="slide hero-bg">
+    <span class="badge">Stack tecnológico</span>
+    <h2>Tecnologia de ponta</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Frontend</h3>
+        <ul>
+          <li>Next.js 16 (App Router)</li>
+          <li>React 19 + TypeScript</li>
+          <li>Tailwind CSS + shadcn/ui</li>
+          <li>Recharts (gráficos)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Backend & Infra</h3>
+        <ul>
+          <li>Supabase (Auth/DB/Storage)</li>
+          <li>Cloudflare Workers (hospedagem)</li>
+          <li>PWA (instalável no celular)</li>
+          <li>Offline-first</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Hospedagem -->
+  <div class="slide hero-bg">
+    <span class="badge">Hospedagem</span>
+    <h2>Publicado na nuvem, disponível 24/7</h2>
+    <p>A aplicação está hospedada gratuitamente no Cloudflare Workers, com CI/CD via GitHub Actions. Qualquer atualização no código é publicada automaticamente.</p>
+    <div class="card">
+      <h3>URL pública</h3>
+      <p style="font-size:1.1rem; color: var(--lime);">https://estar-on-indica.julianoridsi.workers.dev</p>
+    </div>
+    <div class="seal">☁️ Cloudflare Workers — Plano gratuito</div>
+  </div>
+
+  <!-- Slide 9: Certificado/Selo -->
+  <div class="slide green-bg">
+    <span class="badge" style="background:#31393F; color:#D2DD3A;">Certificado</span>
+    <h2>Selo de Qualidade Estar On</h2>
+    <p style="color:#31393F; opacity:0.8;">Este aplicativo é proprietário da Estar On Internet, desenvolvido com padrões de engenharia de software profissional, testado e validado para produção.</p>
+    <div class="seal" style="background:#31393F; color:#D2DD3A; margin-top: 32px;">
+      ✅ Certificado de Qualidade & Segurança
+    </div>
+    <div class="card" style="background: rgba(49,57,63,0.1); border-color: rgba(49,57,63,0.2);">
+      <h3 style="color:#31393F;">Garantias</h3>
+      <ul style="color:#31393F;">
+        <li>Código-fonte proprietário e versionado</li>
+        <li>Banco de dados com RLS e auditoria</li>
+        <li>CPF criptografado (LGPD compliant)</li>
+        <li>Testes de build, typecheck e lint</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 10: CTA -->
+  <div class="slide hero-bg">
+    <span class="badge">Próximo passo</span>
+    <h1>Vamos <span class="accent">começar?</span></h1>
+    <p>Acesse a plataforma e comece a indicar hoje mesmo.</p>
+    <div class="card">
+      <p style="font-size:1.1rem;">🌐 https://estar-on-indica.julianoridsi.workers.dev</p>
+      <p style="font-size:1rem; opacity:0.7; margin-top:8px;">Estar On Internet — Programa de Indicação Oficial</p>
+    </div>
+    <div class="seal">📱 Instalável como app no celular</div>
+  </div>
+
+</div>
+
+<div class="counter"><span id="cur">1</span> / <span id="tot">10</span></div>
+<div class="footer-nav">
+  <button onclick="prev()">◀ Anterior</button>
+  <button onclick="next()">Próximo ▶</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const tot = slides.length;
+  document.getElementById('tot').textContent = tot;
+  let cur = 0;
+  function show(i) {
+    slides[cur].classList.remove('active');
+    cur = (i + tot) % tot;
+    slides[cur].classList.add('active');
+    document.getElementById('cur').textContent = cur + 1;
+  }
+  function next() { show(cur + 1); }
+  function prev() { show(cur - 1); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+</script>
+</body>
+</html>
