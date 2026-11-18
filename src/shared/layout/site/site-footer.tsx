@@ -49,6 +49,11 @@ export async function SiteFooter() {
  </Link>
  </li>
  <li>
+ <Link href="/admin" className="text-slate-500 transition-colors hover:text-white">
+ Acesso gestor
+ </Link>
+ </li>
+ <li>
  <Link href="/regras" className="transition-colors hover:text-white">
  Regras da campanha
  </Link>

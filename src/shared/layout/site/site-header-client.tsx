@@ -31,10 +31,12 @@ export function SiteHeaderClient({
  logoUrl,
  companyName,
  isAuthenticated,
+ isAdmin = false,
 }: {
  logoUrl: string | null;
  companyName: string;
  isAuthenticated: boolean;
+ isAdmin?: boolean;
 }) {
  const [open, setOpen] = useState(false);
 
@@ -56,6 +58,14 @@ export function SiteHeaderClient({
  </nav>
 
  <div className="hidden items-center gap-2 lg:flex">
+ {isAdmin ? (
+ <Button asChild size="sm" className="h-10 bg-brand-500 text-ink hover:bg-brand-400">
+ <Link href="/admin">
+ <ShieldCheck className="size-4" aria-hidden="true" />
+ Painel do Gestor
+ </Link>
+ </Button>
+ ) : null}
  {isAuthenticated ? (
  <Button asChild size="sm" className="h-10">
  <Link href="/painel">
