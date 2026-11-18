@@ -26,7 +26,6 @@ import {
  Zap,
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { TrackingPreview } from "@/shared/marketing/tracking-preview";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { REFERRAL_STATUS_OPTIONS } from "@/features/indicacoes/services/status";
 
@@ -260,9 +259,6 @@ export default function HomePage() {
  </ul>
  </div>
 
- <div className="relative lg:pl-6">
- <TrackingPreview />
- </div>
  </div>
  </section>
 
