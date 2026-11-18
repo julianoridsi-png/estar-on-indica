@@ -40,12 +40,12 @@ export function MonthlyReferralsChart({ data }: MonthlyChartProps) {
  >
  <defs>
  <linearGradient id="totalGradient" x1="0" y1="0" x2="0" y2="1">
- <stop offset="0%" stopColor="#b7d334" stopOpacity={0.55} />
- <stop offset="100%" stopColor="#b7d334" stopOpacity={0.02} />
+ <stop offset="0%" stopColor="#D2DD3A" stopOpacity={0.55} />
+ <stop offset="100%" stopColor="#D2DD3A" stopOpacity={0.02} />
  </linearGradient>
  <linearGradient id="installedGradient" x1="0" y1="0" x2="0" y2="1">
- <stop offset="0%" stopColor="#263740" stopOpacity={0.35} />
- <stop offset="100%" stopColor="#263740" stopOpacity={0.02} />
+ <stop offset="0%" stopColor="#31393F" stopOpacity={0.35} />
+ <stop offset="100%" stopColor="#31393F" stopOpacity={0.02} />
  </linearGradient>
  </defs>
  <CartesianGrid
@@ -68,7 +68,7 @@ export function MonthlyReferralsChart({ data }: MonthlyChartProps) {
  width={40}
  />
  <Tooltip
- cursor={{ stroke: "#b7d334", strokeWidth: 1 }}
+ cursor={{ stroke: "#D2DD3A", strokeWidth: 1 }}
  contentStyle={{
  borderRadius: 12,
  border: "1px solid #e2e6da",
@@ -91,17 +91,17 @@ export function MonthlyReferralsChart({ data }: MonthlyChartProps) {
  stroke="#9cb527"
  strokeWidth={2.5}
  fill="url(#totalGradient)"
- activeDot={{ r: 4, fill: "#b7d334", stroke: "#263740", strokeWidth: 1.5 }}
+ activeDot={{ r: 4, fill: "#D2DD3A", stroke: "#31393F", strokeWidth: 1.5 }}
  />
  <Area
  type="monotone"
  dataKey="instalados"
  name="instalados"
- stroke="#263740"
+ stroke="#31393F"
  strokeWidth={2}
  strokeDasharray="5 4"
  fill="url(#installedGradient)"
- activeDot={{ r: 3.5, fill: "#263740" }}
+ activeDot={{ r: 3.5, fill: "#31393F" }}
  />
  </AreaChart>
  </ResponsiveContainer>

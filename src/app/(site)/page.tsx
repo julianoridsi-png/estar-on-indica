@@ -188,7 +188,7 @@ const FAQ_ITEMS = [
 export default function HomePage() {
  return (
  <>
- <section className="hero-glow relative overflow-hidden bg-[#263740]">
+ <section className="hero-glow relative overflow-hidden bg-[#31393F]">
  <div
  aria-hidden="true"
  className="bg-grid absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black_20%,transparent_92%)]"
