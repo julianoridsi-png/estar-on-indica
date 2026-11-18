@@ -5,23 +5,23 @@ import { isSupabaseConfigured } from "@/services/supabase/config";
 
 const ALLOWED_NEXT = ["/painel", "/admin", "/comercial", "/redefinir-senha"];
 const ALLOWED_TYPES: EmailOtpType[] = [
-  "signup",
-  "invite",
-  "magiclink",
-  "recovery",
-  "email_change",
-  "email",
+ "signup",
+ "invite",
+ "magiclink",
+ "recovery",
+ "email_change",
+ "email",
 ];
 
 function safeNext(value: string | null): string {
-  if (!value) return "/painel";
-  if (!value.startsWith("/") || value.startsWith("//")) return "/painel";
+ if (!value) return "/painel";
+ if (!value.startsWith("/") || value.startsWith("//")) return "/painel";
 
-  const isAllowed = ALLOWED_NEXT.some(
-    (prefix) => value === prefix || value.startsWith(`${prefix}/`),
-  );
+ const isAllowed = ALLOWED_NEXT.some(
+ (prefix) => value === prefix || value.startsWith(`${prefix}/`),
+ );
 
-  return isAllowed ? value : "/painel";
+ return isAllowed ? value : "/painel";
 }
 
 /**
@@ -30,26 +30,26 @@ function safeNext(value: string | null): string {
  * {{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next=/painel
  */
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
-  const tokenHash = searchParams.get("token_hash");
-  const type = searchParams.get("type") as EmailOtpType | null;
-  const next = safeNext(searchParams.get("next"));
+ const { searchParams, origin } = new URL(request.url);
+ const tokenHash = searchParams.get("token_hash");
+ const type = searchParams.get("type") as EmailOtpType | null;
+ const next = safeNext(searchParams.get("next"));
 
-  if (!isSupabaseConfigured()) {
-    return NextResponse.redirect(`${origin}/login?error=configuracao`);
-  }
+ if (!isSupabaseConfigured()) {
+ return NextResponse.redirect(`${origin}/login?error=configuracao`);
+ }
 
-  if (tokenHash && type && ALLOWED_TYPES.includes(type)) {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.verifyOtp({
-      type,
-      token_hash: tokenHash,
-    });
+ if (tokenHash && type && ALLOWED_TYPES.includes(type)) {
+ const supabase = await createClient();
+ const { error } = await supabase.auth.verifyOtp({
+ type,
+ token_hash: tokenHash,
+ });
 
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
-    }
-  }
+ if (!error) {
+ return NextResponse.redirect(`${origin}${next}`);
+ }
+ }
 
-  return NextResponse.redirect(`${origin}/login?error=link_invalido`);
+ return NextResponse.redirect(`${origin}/login?error=link_invalido`);
 }

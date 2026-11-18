@@ -9,9 +9,9 @@ let browserClient: SupabaseClient | undefined;
  * Usa somente a chave pública (anon), que é protegida pelas políticas RLS.
  */
 export function createClient(): SupabaseClient {
-  if (browserClient) return browserClient;
+ if (browserClient) return browserClient;
 
-  const { url, anonKey } = getSupabaseConfig();
-  browserClient = createBrowserClient(url, anonKey);
-  return browserClient;
+ const { url, anonKey } = getSupabaseConfig();
+ browserClient = createBrowserClient(url, anonKey);
+ return browserClient;
 }

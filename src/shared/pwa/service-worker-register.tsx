@@ -7,24 +7,24 @@ import { useEffect } from "react";
  * Em desenvolvimento o cache é desativado para evitar arquivos antigos.
  */
 export function ServiceWorkerRegister() {
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-    if (!("serviceWorker" in navigator)) return;
+ useEffect(() => {
+ if (process.env.NODE_ENV !== "production") return;
+ if (!("serviceWorker" in navigator)) return;
 
-    const register = () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        // A instalação como PWA é opcional; falhas não devem quebrar a aplicação.
-      });
-    };
+ const register = () => {
+ navigator.serviceWorker.register("/sw.js").catch(() => {
+ // A instalação como PWA é opcional; falhas não devem quebrar a aplicação.
+ });
+ };
 
-    if (document.readyState === "complete") {
-      register();
-      return;
-    }
+ if (document.readyState === "complete") {
+ register();
+ return;
+ }
 
-    window.addEventListener("load", register, { once: true });
-    return () => window.removeEventListener("load", register);
-  }, []);
+ window.addEventListener("load", register, { once: true });
+ return () => window.removeEventListener("load", register);
+ }, []);
 
-  return null;
+ return null;
 }

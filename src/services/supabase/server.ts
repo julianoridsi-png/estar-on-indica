@@ -8,24 +8,24 @@ import { getSupabaseConfig } from "./config";
  * Mantém a sessão nos cookies HTTP-only gerenciados pelo @supabase/ssr.
  */
 export async function createClient(): Promise<SupabaseClient> {
-  const { url, anonKey } = getSupabaseConfig();
-  const cookieStore = await cookies();
+ const { url, anonKey } = getSupabaseConfig();
+ const cookieStore = await cookies();
 
-  return createServerClient(url, anonKey, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        try {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options);
-          });
-        } catch {
-          // Server Components não podem gravar cookies.
-          // O proxy (src/proxy.ts) renova a sessão antes da renderização.
-        }
-      },
-    },
-  });
+ return createServerClient(url, anonKey, {
+ cookies: {
+ getAll() {
+ return cookieStore.getAll();
+ },
+ setAll(cookiesToSet) {
+ try {
+ cookiesToSet.forEach(({ name, value, options }) => {
+ cookieStore.set(name, value, options);
+ });
+ } catch {
+ // Server Components não podem gravar cookies.
+ // O proxy (src/proxy.ts) renova a sessão antes da renderização.
+ }
+ },
+ },
+ });
 }

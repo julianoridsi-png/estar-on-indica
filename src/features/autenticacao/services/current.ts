@@ -9,8 +9,8 @@ import { getSessionProfile } from "./queries";
  * Layout e página compartilham o mesmo resultado.
  */
 export const getCurrentSession = cache(async () => {
-  if (!isSupabaseConfigured()) return null;
+ if (!isSupabaseConfigured()) return null;
 
-  const supabase = await createClient();
-  return getSessionProfile(supabase);
+ const supabase = await createClient();
+ return getSessionProfile(supabase);
 });
