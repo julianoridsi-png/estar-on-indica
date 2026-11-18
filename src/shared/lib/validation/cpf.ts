@@ -43,7 +43,8 @@ export function formatCpf(cpf: string): string {
 
 /** Exibe apenas os dois últimos dígitos: ***.***.***-12 */
 export function maskCpfFinal(finalDigits: string | null | undefined): string {
- return `***.***.***-${finalDigits ?? "**"}`;
+ if (!finalDigits) return "Não informado";
+ return `***.***.***-${finalDigits}`;
 }
 
 export function maskEmail(email: string | null | undefined): string {

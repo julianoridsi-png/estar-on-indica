@@ -11,6 +11,8 @@ As migrations são executadas manualmente no **SQL Editor** do Supabase, em orde
 | 5 | `migrations/0005_storage_branding.sql` | 0001–0004 |
 | 6 | `migrations/0006_pix_referrals.sql` | 0001–0005 |
 | 7 | `migrations/0007_admin_control.sql` | 0001–0006 |
+| 8 | `migrations/0008_cpf_opcional_indicacao.sql` | 0001–0007 |
+| 9 | `migrations/0009_cpf_opcional_coluna.sql` | 0001–0008 |
 
 ## Cuidados
 

@@ -25,8 +25,12 @@ export const referralFormSchema = z.object({
  indicado_cpf: z
  .string()
  .trim()
- .min(1, { message: "Informe o CPF da pessoa indicada." })
- .refine(isValidCpf, { message: "CPF inválido. Confira os números." }),
+ .max(14, { message: "CPF inválido." })
+ .refine((value) => value === "" || isValidCpf(value), {
+ message: "CPF inválido. Confira os números.",
+ })
+ .optional()
+ .or(z.literal("")),
  indicado_email: emailField,
  indicado_telefone: z
  .string()

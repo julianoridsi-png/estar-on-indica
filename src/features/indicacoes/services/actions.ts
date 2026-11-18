@@ -63,7 +63,7 @@ export async function createReferralAction(
 
  const { data: result, error } = await supabase.rpc("criar_indicacao", {
  p_indicado_nome: data.indicado_nome.trim(),
- p_indicado_cpf: onlyDigits(data.indicado_cpf),
+ p_indicado_cpf: data.indicado_cpf?.trim() ? onlyDigits(data.indicado_cpf) : null,
  p_indicado_email: data.indicado_email.trim().toLowerCase(),
  p_indicado_telefone: onlyDigits(data.indicado_telefone),
  p_cep: onlyDigits(data.cep),

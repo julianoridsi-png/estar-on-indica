@@ -197,10 +197,10 @@ export function ReferralForm() {
  </FormField>
 
  <FormField
- label="CPF"
+ label="CPF (opcional)"
  htmlFor="indicado_cpf"
- required
  error={errors.indicado_cpf?.message}
+ hint="Informe apenas se tiver o CPF da pessoa indicada."
  >
  <Controller
  control={control}
