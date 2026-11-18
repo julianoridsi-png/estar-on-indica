@@ -7,6 +7,7 @@ import {
  isSupabaseConfigured,
  SETUP_REQUIRED_MESSAGE,
 } from "@/services/supabase/config";
+import { verifyTurnstile } from "@/shared/lib/turnstile";
 import {
  forgotPasswordSchema,
  loginFormSchema,
@@ -95,7 +96,11 @@ export async function signUpAction(
  }
 
  const data = parsed.data;
- const cpf = onlyDigits(data.cpf);
+ if (!(await verifyTurnstile(data.turnstileToken))) {
+    return { status: "error", message: "Verificação de segurança falhou. Tente novamente." };
+  }
+
+  const cpf = onlyDigits(data.cpf);
  const supabase = await createClient();
 
  // Evita criar o usuário de autenticação quando o CPF já possui perfil.
@@ -187,8 +192,12 @@ export async function signInAction(
  };
  }
 
- const supabase = await createClient();
- const { data, error } = await supabase.auth.signInWithPassword({
+ if (!(await verifyTurnstile(parsed.data.turnstileToken))) {
+    return { status: "error", message: "Verificação de segurança falhou. Tente novamente." };
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
  email: parsed.data.email.toLowerCase().trim(),
  password: parsed.data.senha,
  });

@@ -1,5 +1,7 @@
 "use server";
 
+import ExcelJS from "exceljs";
+
 import { revalidatePath } from "next/cache";
 import { getCurrentSession } from "@/features/autenticacao/services/current";
 import { friendlyDbError } from "@/shared/lib/errors";
@@ -239,4 +241,69 @@ export async function generatePendingRewardsAction(): Promise<AdminActionResult>
  ? "Nenhuma recompensa pendente para gerar."
  : `${criadas} ${criadas === 1 ? "recompensa gerada" : "recompensas geradas"}.`,
  };
+}
+
+export async function exportRewardsExcelAction(): Promise<
+  | { status: "success"; data: string; filename: string }
+  | { status: "error"; message: string }
+> {
+  if (!isSupabaseConfigured()) {
+    return { status: "error", message: SETUP_REQUIRED_MESSAGE };
+  }
+
+  const { error: authError, supabase } = await requireAdmin();
+  if (authError || !supabase) {
+    return { status: "error", message: authError ?? "Acesso negado." };
+  }
+
+  const { data, error } = await supabase.rpc("admin_listar_recompensas");
+  if (error) {
+    console.error("Erro ao exportar recompensas:", error.message);
+    return {
+      status: "error",
+      message: friendlyDbError(error.message, "Não foi possível exportar."),
+    };
+  }
+
+  const rewards = (data ?? []) as Array<Record<string, unknown>>;
+
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet("Recompensas");
+
+  sheet.columns = [
+    { header: "Indicado", key: "indicado_nome", width: 30 },
+    { header: "Indicador", key: "indicator_nome", width: 30 },
+    { header: "E-mail", key: "indicator_email", width: 30 },
+    { header: "Valor (R$)", key: "valor_centavos", width: 14 },
+    { header: "Status", key: "status", width: 14 },
+    { header: "PIX", key: "pix_mascarada", width: 20 },
+    { header: "Registrada em", key: "created_at", width: 20 },
+    { header: "Liberada em", key: "liberado_em", width: 20 },
+    { header: "Paga em", key: "pago_em", width: 20 },
+    { header: "Descrição", key: "descricao", width: 40 },
+  ];
+
+  rewards.forEach((r) => {
+    sheet.addRow({
+      ...r,
+      valor_centavos: Number(r.valor_centavos ?? 0) / 100,
+    });
+  });
+
+  // Style header
+  sheet.getRow(1).font = { bold: true, color: { argb: "FFFFFFFF" } };
+  sheet.getRow(1).fill = {
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FF31393F" },
+  };
+
+  const buffer = await workbook.xlsx.writeBuffer();
+  const base64 = Buffer.from(buffer).toString("base64");
+
+  return {
+    status: "success",
+    data: base64,
+    filename: `recompensas-${new Date().toISOString().slice(0, 10)}.xlsx`,
+  };
 }

@@ -8,6 +8,7 @@ import {
  Send,
  Users,
  Wallet,
+ ShieldCheck,
  type LucideIcon,
 } from "lucide-react";
 import type { TipoUsuario } from "@/features/autenticacao/services/queries";
@@ -33,6 +34,7 @@ const STAFF_ITEMS: NavItem[] = [
 
 const ADMIN_EXTRA: NavItem[] = [
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet },
+ { label: "MFA", href: "/configurar-mfa", icon: ShieldCheck },
 ];
 
 export function AppNav({ tipoUsuario }: { tipoUsuario: TipoUsuario }) {

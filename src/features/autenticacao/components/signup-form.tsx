@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Fragment, useState, useTransition } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import {
@@ -67,6 +68,7 @@ export function SignupForm({ configured }: { configured: boolean }) {
  const [serverError, setServerError] = useState<string | null>(null);
  const [cepStatus, setCepStatus] = useState<CepStatus>("idle");
  const [isPending, startTransition] = useTransition();
+ const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
  const {
  register,
@@ -162,7 +164,7 @@ export function SignupForm({ configured }: { configured: boolean }) {
  setServerError(null);
 
  startTransition(async () => {
- const result = await signUpAction(values);
+ const result = await signUpAction({ ...values, turnstileToken: turnstileToken ?? undefined });
 
  if (result.status === "error") {
  setServerError(result.message);
@@ -682,6 +684,21 @@ export function SignupForm({ configured }: { configured: boolean }) {
  <ArrowRight className="size-4" aria-hidden="true" />
  </Button>
  ) : (
+ <div className="space-y-3">
+ {configured ? (
+ <div className="flex justify-center">
+ <Turnstile
+ siteKey={
+ process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+ "1x00000000000000000000AA"
+ }
+ onSuccess={(token) => setTurnstileToken(token)}
+ onError={() => setTurnstileToken(null)}
+ onExpire={() => setTurnstileToken(null)}
+ />
+ </div>
+ ) : null}
+
  <Button
  type="submit"
  size="lg"
@@ -705,6 +722,7 @@ export function SignupForm({ configured }: { configured: boolean }) {
  </>
  )}
  </Button>
+ </div>
  )}
  </div>
  </form>

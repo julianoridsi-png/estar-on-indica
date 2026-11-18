@@ -84,7 +84,8 @@ export const signupFormSchema = z
  aceite_termos: z.boolean().refine((value) => value === true, {
  message: "É necessário aceitar os termos e a política de privacidade.",
  }),
- })
+ turnstileToken: z.string().optional(),
+})
  .refine((data) => data.senha === data.confirmar_senha, {
  path: ["confirmar_senha"],
  message: "As senhas não coincidem.",
@@ -96,6 +97,7 @@ export const loginFormSchema = z.object({
  email: emailField,
  senha: z.string().min(1, { message: "Informe sua senha." }),
  next: z.string().optional(),
+ turnstileToken: z.string().optional(),
 });
 
 export type LoginFormValues = z.infer<typeof loginFormSchema>;

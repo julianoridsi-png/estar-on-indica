@@ -14,6 +14,7 @@ import { Button } from "@/shared/ui/button";
 import { StatCard } from "@/shared/layout/stat-card";
 import { RewardSettingsForm, GenerateRewardsButton } from "@/features/administracao/components/reward-settings-form";
 import { RewardsTable } from "@/features/administracao/components/rewards-table";
+import { ExportExcelButton } from "@/features/administracao/components/export-excel-button";
 import { getCurrentSession } from "@/features/autenticacao/services/current";
 import { createClient } from "@/services/supabase/server";
 import { formatCurrencyBRL, formatNumberBR } from "@/shared/lib/format";
@@ -124,6 +125,7 @@ export default async function AdminRewardsPage(
  Administrador
  </span>
  <GenerateRewardsButton />
+ <ExportExcelButton />
  </div>
  </div>
 

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { ArrowRight, Loader2, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/shared/ui/button";
@@ -56,11 +57,13 @@ export function LoginForm({
  },
  });
 
+ const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
  const onSubmit = (values: LoginFormValues) => {
  setServerError(null);
 
  startTransition(async () => {
- const result = await signInAction(values);
+ const result = await signInAction({ ...values, turnstileToken: turnstileToken ?? undefined });
 
  if (result.status === "error") {
  setServerError(result.message);
@@ -136,6 +139,20 @@ export function LoginForm({
  Esqueci minha senha
  </Link>
  </div>
+
+ {configured ? (
+ <div className="flex justify-center">
+ <Turnstile
+ siteKey={
+ process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
+ "1x00000000000000000000AA"
+ }
+ onSuccess={(token) => setTurnstileToken(token)}
+ onError={() => setTurnstileToken(null)}
+ onExpire={() => setTurnstileToken(null)}
+ />
+ </div>
+ ) : null}
 
  <Button
  type="submit"
