@@ -189,6 +189,17 @@ const FAQ_ITEMS = [
 export default function HomePage() {
  return (
  <>
+ <div className="overflow-hidden">
+ <Image
+ src="/branding/indique-ganhe-banner.png"
+ alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
+ width={1920}
+ height={650}
+ className="h-auto w-full object-cover"
+ priority
+ />
+ </div>
+
  <section className="hero-glow relative overflow-hidden bg-[#31393F]">
  <div
  aria-hidden="true"
@@ -254,17 +265,6 @@ export default function HomePage() {
  </div>
  </div>
  </section>
-
- <div className="overflow-hidden">
- <Image
- src="/branding/indique-ganhe-banner.png"
- alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
- width={1920}
- height={650}
- className="h-auto w-full object-cover"
- priority
- />
- </div>
 
  <section className="border-y border-border bg-card">
  <div className="container-page grid grid-cols-1 divide-y divide-border sm:grid-cols-2 sm:divide-x lg:grid-cols-4">
