@@ -28,7 +28,12 @@ export function Logo({
  const src = logoUrl || DEFAULT_LOGO_SRC;
 
  const content = (
- <span className="inline-flex items-center rounded-xl p-1.5 ">
+ <span
+ className={cn(
+ "inline-flex items-center rounded-xl p-1.5",
+ variant === "dark" && "bg-white/95 shadow-sm ring-1 ring-white/20",
+ )}
+ >
  <Image
  src={src}
  alt={`${companyName} — logotipo`}
