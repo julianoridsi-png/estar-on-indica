@@ -200,25 +200,25 @@ export default function HomePage() {
  />
  </div>
 
- <section className="hero-glow relative overflow-hidden bg-[#31393F]">
+ <section className="hero-glow relative overflow-hidden bg-white">
  <div
  aria-hidden="true"
  className="bg-grid absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black_20%,transparent_92%)]"
  />
  <div className="container-page relative grid items-center gap-14 py-14 sm:py-16 lg:grid-cols-[1.04fr_0.96fr] lg:gap-10 lg:py-24">
  <div className="animate-rise">
- <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[11px] font-bold tracking-wide text-brand-200 uppercase shadow-sm backdrop-blur-sm">
- <Sparkles className="size-3.5 text-brand-300" aria-hidden="true" />
+ <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#f4f5fa] px-3.5 py-1.5 text-[11px] font-bold tracking-wide text-[#31393F] uppercase shadow-sm backdrop-blur-sm">
+ <Sparkles className="size-3.5 text-[#D2DD3A]" aria-hidden="true" />
  Programa oficial Estar On Internet
  </span>
 
- <h1 className="mt-6 font-heading text-[2.45rem] leading-[1.05] font-bold text-white sm:text-5xl xl:text-[3.6rem]">
+ <h1 className="mt-6 font-heading text-[2.45rem] leading-[1.05] font-bold text-[#31393F] sm:text-5xl xl:text-[3.6rem]">
  A internet conecta.
  <br />
  <span className="text-brand-300">A EstarOn recompensa!!!</span>
  </h1>
 
- <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-slate-200 sm:text-base">
+ <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-gray-600 sm:text-base">
  Indique o melhor provedor de internet da região e ganhe R$ 50 por
  cada amigo que contratar a EstarOn!
  </p>
@@ -234,7 +234,7 @@ export default function HomePage() {
  asChild
  variant="outline"
  size="lg"
- className="h-13 border-white/20 bg-white/10 px-6 text-white hover:bg-white/20"
+ className="h-13 border-white/20 bg-[#f4f5fa] px-6 text-[#31393F] hover:bg-gray-100"
  >
  <Link href="/login">
  <LayoutDashboard className="size-4" aria-hidden="true" />
@@ -438,7 +438,7 @@ export default function HomePage() {
  </ul>
 
  <p className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4 text-[10px] text-slate-400">
- <History className="size-3.5 text-brand-300" aria-hidden="true" />
+ <History className="size-3.5 text-[#D2DD3A]" aria-hidden="true" />
  Todas as etapas ficam registradas no histórico da indicação.
  </p>
  </div>
