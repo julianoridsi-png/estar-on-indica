@@ -145,7 +145,7 @@ export function LoginForm({
  <Turnstile
  siteKey={
  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??
- "1x00000000000000000000AA"
+ "0x4AAAAAAGHdmuHUuGn3_WXT"
  }
  onSuccess={(token) => setTurnstileToken(token)}
  onError={() => setTurnstileToken(null)}
