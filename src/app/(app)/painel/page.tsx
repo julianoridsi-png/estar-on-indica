@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
@@ -92,6 +93,17 @@ export default async function IndicatorDashboardPage() {
 
  return (
  <div className="space-y-6">
+ <div className="overflow-hidden rounded-2xl border border-border shadow-soft">
+ <Image
+ src="/branding/indique-ganhe-banner.png"
+ alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
+ width={1920}
+ height={650}
+ className="h-auto w-full object-cover"
+ priority
+ />
+ </div>
+
  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
  <div>
  <p className="flex items-center gap-1.5 text-[10px] font-bold tracking-[0.16em] text-brand-600 uppercase">
