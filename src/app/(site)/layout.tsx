@@ -1,6 +1,8 @@
 import { SiteFooter } from "@/shared/layout/site/site-footer";
 import { SiteHeader } from "@/shared/layout/site/site-header";
 
+export const dynamic = "force-dynamic";
+
 export default function SiteLayout({
   children,
 }: {
