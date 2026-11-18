@@ -10,6 +10,8 @@ import { getCurrentSession } from "@/features/autenticacao/services/current";
 import { signOutAction } from "@/features/autenticacao/services/actions";
 import { isSupabaseConfigured } from "@/services/supabase/config";
 
+export const dynamic = "force-dynamic";
+
 export default async function AppLayout({
   children,
 }: {

@@ -10,6 +10,8 @@ import {
 import { Logo } from "@/shared/brand/logo";
 import { getPublicSettings } from "@/shared/lib/settings";
 
+export const dynamic = "force-dynamic";
+
 export default async function AuthLayout({
   children,
 }: {
