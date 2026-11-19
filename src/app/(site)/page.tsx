@@ -26,6 +26,7 @@ import {
  Zap,
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
+import { MoneyNotesAnimation } from "@/shared/layout/money-notes-animation";
 import { TrackingPreview } from "@/shared/marketing/tracking-preview";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { REFERRAL_STATUS_OPTIONS } from "@/features/indicacoes/services/status";
@@ -189,6 +190,7 @@ const FAQ_ITEMS = [
 export default function HomePage() {
  return (
  <>
+ <div className="relative">
  <div className="overflow-hidden">
  <Image
  src="/branding/indique-ganhe-banner.png"
@@ -199,6 +201,8 @@ export default function HomePage() {
  priority
  />
  </div>
+
+ <MoneyNotesAnimation />
 
  <section className="hero-glow relative overflow-hidden bg-white">
  <div
@@ -265,6 +269,8 @@ export default function HomePage() {
  </div>
  </div>
  </section>
+
+ </div>
 
  <section className="border-y border-border bg-card">
  <div className="container-page grid grid-cols-1 divide-y divide-border sm:grid-cols-2 sm:divide-x lg:grid-cols-4">
