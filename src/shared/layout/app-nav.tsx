@@ -7,6 +7,7 @@ import {
  QrCode,
  Send,
  Users,
+ UserCog,
  Wallet,
  ShieldCheck,
  type LucideIcon,
@@ -30,6 +31,7 @@ const STAFF_ITEMS: NavItem[] = [
  { label: "Painel gestor", href: "/admin", icon: LayoutDashboard },
  { label: "Indicações", href: "/admin/indicacoes", icon: Send },
  { label: "Indicadores", href: "/admin/indicadores", icon: Users },
+ { label: "Usuários", href: "/admin/usuarios", icon: UserCog },
 ];
 
 const ADMIN_EXTRA: NavItem[] = [
