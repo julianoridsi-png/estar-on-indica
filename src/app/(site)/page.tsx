@@ -299,11 +299,16 @@ export default function HomePage() {
  Como funciona
  </p>
  <h2 className="mt-3 font-heading text-3xl font-bold text-ink sm:text-4xl">
- Três passos para começar
+ Como funciona o Indique e Ganhe
  </h2>
  <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
- Um processo simples, com validações de segurança em cada etapa e
- acompanhamento completo pelo painel do indicador.
+ Indique e ganhe com a Estar On! Indique um amigo, familiar ou conhecido
+ interessado em contratar nossa internet. Nossa equipe entrará em contato
+ para verificar a disponibilidade e a viabilidade técnica. Se houver
+ viabilidade, a contratação será realizada e a instalação concluída. Após
+ o pagamento da primeira mensalidade, sua bonificação será liberada conforme
+ as regras da campanha vigente. É simples: você indica, nós cuidamos do
+ processo e você recebe sua recompensa!
  </p>
  </div>
 
