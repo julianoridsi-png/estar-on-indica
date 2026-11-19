@@ -26,7 +26,6 @@ import {
  Zap,
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { MoneyNotesAnimation } from "@/shared/layout/money-notes-animation";
 import { TrackingPreview } from "@/shared/marketing/tracking-preview";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { REFERRAL_STATUS_OPTIONS } from "@/features/indicacoes/services/status";
@@ -201,13 +200,18 @@ export default function HomePage() {
  priority
  />
  </div>
-
- <MoneyNotesAnimation />
-
  <section className="hero-glow relative overflow-hidden bg-white">
  <div
- aria-hidden="true"
- className="bg-grid absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black_20%,transparent_92%)]"
+  aria-hidden="true"
+  className="bg-grid absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black_20%,transparent_92%)]"
+ />
+ <div
+  aria-hidden="true"
+  className="pointer-events-none absolute inset-0"
+  style={{
+   background:
+    "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(210, 221, 58, 0.10), transparent 70%)"
+  }}
  />
  <div className="container-page relative grid items-center gap-14 py-14 sm:py-16 lg:grid-cols-[1.04fr_0.96fr] lg:gap-10 lg:py-24">
  <div className="animate-rise">
