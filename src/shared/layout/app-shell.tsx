@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
+import { PageTracker } from "@/features/administracao/components/page-tracker";
 import { AppNav } from "@/shared/layout/app-nav";
 import { Logo } from "@/shared/brand/logo";
 import { signOutAction } from "@/features/autenticacao/services/actions";
@@ -96,6 +97,8 @@ export function AppShell({
  </header>
 
  <AppNav tipoUsuario={profile.tipo_usuario} />
+
+ <PageTracker />
 
  <main className="container-page py-7 sm:py-9">{children}</main>
  </div>

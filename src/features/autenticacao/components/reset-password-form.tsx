@@ -46,7 +46,7 @@ export function ResetPasswordForm({ email }: { email: string | null }) {
  }
 
  toast.success("Senha alterada com sucesso");
- router.replace(result.redirectTo ?? "/painel");
+ router.replace(result.status === "success" ? (result.redirectTo ?? "/painel") : "/painel");
  router.refresh();
  });
  };

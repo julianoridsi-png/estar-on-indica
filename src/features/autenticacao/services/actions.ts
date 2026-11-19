@@ -22,6 +22,7 @@ import { PRIVACY_VERSION, TERMS_VERSION } from "@/shared/lib/legal";
 
 export type AuthActionResult =
  | { status: "success"; redirectTo?: string; message?: string }
+ | { status: "mfa_required"; factorId: string; challengeId: string }
  | { status: "error"; message: string; field?: string };
 
 function safeNextPath(value: unknown): string | null {
@@ -228,7 +229,23 @@ export async function signInAction(
  };
  }
 
- if (!data.user) {
+ // MFA: se o usuário tem fator verificado, a sessão não é emitida diretamente.
+  if (data.user && !data.session) {
+    const factors = await supabase.auth.mfa.listFactors();
+    const totp = factors.data?.totp?.find((f) => f.status === "verified");
+    if (totp) {
+      const challenge = await supabase.auth.mfa.challenge({ factorId: totp.id });
+      if (challenge.data) {
+        return {
+          status: "mfa_required",
+          factorId: totp.id,
+          challengeId: challenge.data.id,
+        };
+      }
+    }
+  }
+
+  if (!data.user) {
  return { status: "error", message: "Não foi possível iniciar a sessão." };
  }
 

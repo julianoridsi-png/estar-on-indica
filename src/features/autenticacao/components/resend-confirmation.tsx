@@ -27,7 +27,7 @@ export function ResendConfirmation({
  }
 
  toast.success("Solicitação registrada", {
- description: result.message,
+ description: "Verifique sua caixa de entrada.",
  });
  });
  };

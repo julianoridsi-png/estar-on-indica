@@ -307,3 +307,17 @@ export async function exportRewardsExcelAction(): Promise<
     filename: `recompensas-${new Date().toISOString().slice(0, 10)}.xlsx`,
   };
 }
+
+export async function trackPageViewAction(path: string): Promise<void> {
+  if (!isSupabaseConfigured()) return;
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    await supabase.from("page_views").insert({
+      path,
+      user_id: user?.id ?? null,
+    });
+  } catch {
+    // silently fail
+  }
+}

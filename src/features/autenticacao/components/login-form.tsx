@@ -58,6 +58,9 @@ export function LoginForm({
  });
 
  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+ const [mfaFactorId, setMfaFactorId] = useState<string | null>(null);
+ const [mfaChallengeId, setMfaChallengeId] = useState<string | null>(null);
+ const [mfaCode, setMfaCode] = useState("");
 
  const onSubmit = (values: LoginFormValues) => {
  setServerError(null);
@@ -73,12 +76,57 @@ export function LoginForm({
  return;
  }
 
- if (result.redirectTo) {
+ if (result.status === "mfa_required") {
+ setMfaFactorId(result.factorId);
+ setMfaChallengeId(result.challengeId);
+ return;
+ }
+
+ if (result.status === "success" && result.redirectTo) {
  router.replace(result.redirectTo);
  router.refresh();
  }
  });
  };
+
+ if (mfaFactorId && mfaChallengeId) {
+ return (
+ <div className="animate-rise space-y-4">
+ <h1 className="font-heading text-2xl font-bold text-ink">
+ Verificação MFA
+ </h1>
+ <p className="text-sm text-muted-foreground">
+ Digite o código do seu aplicativo autenticador.
+ </p>
+ <Input
+ value={mfaCode}
+ onChange={(e) => setMfaCode(e.target.value)}
+ placeholder="000000"
+ inputMode="numeric"
+ />
+ <Button
+ onClick={() => {
+ startTransition(async () => {
+ const { verifyMfaChallengeAction } = await import("@/features/autenticacao/services/mfa");
+ const result = await verifyMfaChallengeAction(mfaFactorId, mfaChallengeId, mfaCode);
+ if (result.status === "error") {
+ setServerError(result.message);
+ toast.error("Código inválido", { description: result.message });
+ return;
+ }
+ router.replace("/painel");
+ router.refresh();
+ });
+ }}
+ disabled={isPending || !mfaCode}
+ className="w-full"
+ >
+ {isPending ? "Verificando..." : "Verificar"}
+ </Button>
+ {serverError ? <p className="text-sm text-red-600">{serverError}</p> : null}
+ </div>
+ );
+ }
 
  return (
  <div className="animate-rise">

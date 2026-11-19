@@ -22,6 +22,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
 import { StatCard } from "@/shared/layout/stat-card";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
+import { AccessReport } from "@/features/administracao/components/access-report";
 import {
  MonthlyReferralsChart,
  StatusDonutChart,
@@ -443,6 +444,19 @@ export default async function AdminDashboardPage() {
  )}
  </section>
  </div>
+
+  <section className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+    <div className="flex items-center gap-2.5 mb-4">
+      <span className="grid size-9 place-items-center rounded-xl bg-ink text-brand-300">
+        <ShieldCheck className="size-4.5" aria-hidden="true" />
+      </span>
+      <div>
+        <h2 className="font-heading text-sm font-bold text-ink">Relatório de acessos</h2>
+        <p className="text-[10px] text-muted-foreground">Quantas pessoas acessam o sistema.</p>
+      </div>
+    </div>
+    <AccessReport />
+  </section>
 
  <section className="rounded-2xl border border-border bg-card p-5 shadow-soft">
  <div className="flex items-center gap-2.5">

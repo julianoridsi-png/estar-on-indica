@@ -40,14 +40,14 @@ export function ForgotPasswordForm({ configured }: { configured: boolean }) {
  if (result.status === "error") {
  setServerError(result.message);
  toast.error("Não foi possível enviar", {
- description: result.message,
+ description: "Verifique sua caixa de entrada.",
  });
  return;
  }
 
  setSentTo(values.email);
  toast.success("Solicitação registrada", {
- description: result.message,
+ description: "Verifique sua caixa de entrada.",
  });
  });
  };

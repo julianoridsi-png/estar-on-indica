@@ -183,7 +183,7 @@ export function SignupForm({ configured }: { configured: boolean }) {
  return;
  }
 
- if (result.redirectTo) {
+ if (result.status === "success" && result.redirectTo) {
  window.location.assign(result.redirectTo);
  }
  });
