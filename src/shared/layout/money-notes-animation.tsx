@@ -1,62 +1,51 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-type Note = {
+gsap.registerPlugin(ScrollTrigger);
+
+type NoteConfig = {
   id: number;
   x: number;
   y: number;
   size: number;
-  speed: number;
   depth: number;
   rotation: number;
   delay: number;
 };
 
-const NOTES: Note[] = [
-  { id: 1, x: 8, y: 12, size: 140, speed: 1, depth: 0.3, rotation: -12, delay: 0 },
-  { id: 2, x: 85, y: 18, size: 110, speed: 1.4, depth: 0.6, rotation: 8, delay: 0.5 },
-  { id: 3, x: 45, y: 8, size: 95, speed: 0.8, depth: 0.9, rotation: -6, delay: 1 },
-  { id: 4, x: 72, y: 58, size: 160, speed: 1.2, depth: 0.2, rotation: 15, delay: 0.3 },
-  { id: 5, x: 18, y: 68, size: 120, speed: 1.6, depth: 0.5, rotation: -18, delay: 0.8 },
-  { id: 6, x: 92, y: 42, size: 90, speed: 0.9, depth: 0.8, rotation: 22, delay: 1.2 },
-  { id: 7, x: 4, y: 38, size: 130, speed: 1.1, depth: 0.4, rotation: -8, delay: 0.2 },
-  { id: 8, x: 55, y: 82, size: 105, speed: 1.3, depth: 0.7, rotation: 12, delay: 0.6 },
-  { id: 9, x: 35, y: 22, size: 80, speed: 0.7, depth: 1, rotation: -20, delay: 1.4 },
-  { id: 10, x: 78, y: 78, size: 135, speed: 1.5, depth: 0.35, rotation: 18, delay: 0.4 },
+const NOTES: NoteConfig[] = [
+  { id: 1, x: 8, y: 10, size: 150, depth: 0.2, rotation: -12, delay: 0 },
+  { id: 2, x: 88, y: 15, size: 110, depth: 0.5, rotation: 8, delay: 0.4 },
+  { id: 3, x: 48, y: 5, size: 90, depth: 0.85, rotation: -6, delay: 0.8 },
+  { id: 4, x: 75, y: 55, size: 170, depth: 0.15, rotation: 15, delay: 0.2 },
+  { id: 5, x: 16, y: 65, size: 125, depth: 0.45, rotation: -18, delay: 0.6 },
+  { id: 6, x: 94, y: 40, size: 85, depth: 0.75, rotation: 22, delay: 1.0 },
+  { id: 7, x: 3, y: 35, size: 140, depth: 0.3, rotation: -8, delay: 0.1 },
+  { id: 8, x: 58, y: 80, size: 110, depth: 0.6, rotation: 12, delay: 0.5 },
+  { id: 9, x: 32, y: 20, size: 75, depth: 1.0, rotation: -20, delay: 1.2 },
+  { id: 10, x: 80, y: 75, size: 145, depth: 0.25, rotation: 18, delay: 0.3 },
 ];
 
 export function MoneyNotesAnimation() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const noteRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const scrollRef = useRef(0);
-  const rafRef = useRef<number>(0);
+  const smoothRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-
-    const mobileMq = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mobileMq.matches);
-    const mobileHandler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mobileMq.addEventListener("change", mobileHandler);
-
-    return () => {
-      mq.removeEventListener("change", handler);
-      mobileMq.removeEventListener("change", mobileHandler);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (reducedMotion) return;
     const container = containerRef.current;
     if (!container) return;
 
-    let running = true;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const visibleNotes = isMobile ? NOTES.slice(0, 4) : NOTES;
+
+    // Set up mouse tracking
     const handleMouse = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       mouseRef.current = {
@@ -64,53 +53,89 @@ export function MoneyNotesAnimation() {
         y: (e.clientY - rect.top) / rect.height - 0.5,
       };
     };
-    const handleScroll = () => {
-      scrollRef.current = window.scrollY;
-    };
-
-    const smooth = { x: 0, y: 0 };
-    const animate = () => {
-      if (!running) return;
-      const rect = container.getBoundingClientRect();
-      const cx = mouseRef.current.x;
-      const cy = mouseRef.current.y;
-      // smooth interpolation
-      smooth.x += (cx - smooth.x) * 0.08;
-      smooth.y += (cy - smooth.y) * 0.08;
-
-      const noteEls = container.querySelectorAll<HTMLElement>(".money-note");
-      noteEls.forEach((el, i) => {
-        const note = NOTES[i];
-        if (!note) return;
-        const depth = note.depth;
-        const mx = smooth.x * depth * 40;
-        const my = smooth.y * depth * 30;
-        const sy = scrollRef.current * depth * 0.12;
-        const t = Date.now() / 1000;
-        const fx = Math.sin(t * 0.7 + i * 1.3) * 6;
-        const fy = Math.cos(t * 0.5 + i * 0.9) * 10;
-        const rot = note.rotation + Math.sin(t * 0.4 + i) * 4;
-        const rx = Math.sin(t * 0.3 + i * 0.7) * 8;
-        const ry = Math.cos(t * 0.4 + i * 1.1) * 12;
-        el.style.transform = `translate3d(${mx + fx}px, ${my + fy - sy}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rot}deg)`;
-      });
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
     window.addEventListener("mousemove", handleMouse, { passive: true });
+
+    // Smooth interpolation loop
+    let rafId: number;
+    const animate = () => {
+      const smooth = smoothRef.current;
+      smooth.x += (mouseRef.current.x - smooth.x) * 0.06;
+      smooth.y += (mouseRef.current.y - smooth.y) * 0.06;
+
+      visibleNotes.forEach((note, i) => {
+        const el = noteRefs.current[i];
+        if (!el) return;
+        const depth = note.depth;
+        const mx = smooth.x * depth * 50;
+        const my = smooth.y * depth * 35;
+        const t = performance.now() / 1000;
+        const fx = Math.sin(t * 0.6 + i * 1.3) * 8;
+        const fy = Math.cos(t * 0.45 + i * 0.9) * 12;
+        const rot = note.rotation + Math.sin(t * 0.35 + i) * 5;
+        const rx = Math.sin(t * 0.25 + i * 0.7) * 10;
+        const ry = Math.cos(t * 0.3 + i * 1.1) * 15;
+        el.style.transform = `translate3d(${mx + fx}px, ${my + fy}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rot}deg)`;
+      });
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+
+    // ScrollTrigger parallax
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: container,
+      start: "top top",
+      end: "bottom top",
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        visibleNotes.forEach((note, i) => {
+          const el = noteRefs.current[i];
+          if (!el) return;
+          const depth = note.depth;
+          const sy = progress * depth * 80;
+          // Apply scroll offset (combined with mouse in animate loop via ref)
+          el.dataset.scrollY = String(sy);
+        });
+      },
+    });
+
+    // Combine scroll into animate loop
+    const origAnimate = animate;
+    // We'll just let scrollRef track it
+    const handleScroll = () => {
+      // scroll progress handled by scrollTrigger
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      running = false;
       window.removeEventListener("mousemove", handleMouse);
       window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(rafId);
+      scrollTrigger.kill();
     };
-  }, [reducedMotion]);
+  }, []);
 
-  if (reducedMotion) return null;
+  // Intersection Observer to pause
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            container.style.visibility = "visible";
+          } else {
+            container.style.visibility = "hidden";
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
+  const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
   const visibleNotes = isMobile ? NOTES.slice(0, 4) : NOTES;
 
   return (
@@ -118,20 +143,22 @@ export function MoneyNotesAnimation() {
       ref={containerRef}
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-10 overflow-hidden"
-      style={{ perspective: "1200px" }}
+      style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
     >
-      {visibleNotes.map((note) => (
+      {visibleNotes.map((note, i) => (
         <div
           key={note.id}
+          ref={(el) => { noteRefs.current[i] = el; }}
           className="money-note absolute"
           style={{
             left: `${note.x}%`,
             top: `${note.y}%`,
             width: `${note.size}px`,
-            opacity: 0.9 - note.depth * 0.2,
-            filter: note.depth > 0.7 ? "blur(0.5px)" : "none",
+            opacity: 0.92 - note.depth * 0.25,
+            filter: note.depth > 0.7 ? "blur(0.4px)" : "none",
             transformStyle: "preserve-3d",
             willChange: "transform",
+            transition: "opacity 0.3s ease",
           }}
         >
           <img
@@ -140,7 +167,7 @@ export function MoneyNotesAnimation() {
             draggable={false}
             className="h-auto w-full select-none"
             style={{
-              filter: `drop-shadow(0 ${4 + note.depth * 8}px ${12 + note.depth * 20}px rgba(0,0,0,${0.2 + note.depth * 0.15}))`,
+              filter: `drop-shadow(0 ${6 + note.depth * 10}px ${16 + note.depth * 24}px rgba(0,0,0,${0.25 + note.depth * 0.15}))`,
             }}
           />
         </div>

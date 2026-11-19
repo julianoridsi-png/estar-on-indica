@@ -3,6 +3,7 @@ import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/shared/providers";
 import { ServiceWorkerRegister } from "@/shared/pwa/service-worker-register";
+import { LenisProvider } from "@/shared/layout/lenis-provider";
 
 const manrope = Manrope({
  variable: "--font-manrope",
@@ -76,9 +77,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
  >
  <body className="min-h-dvh bg-background">
  <Providers>
- {children}
- <ServiceWorkerRegister />
- </Providers>
+          <LenisProvider>
+            {children}
+            <ServiceWorkerRegister />
+          </LenisProvider>
+        </Providers>
  </body>
  </html>
  );
