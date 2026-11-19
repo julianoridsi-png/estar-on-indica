@@ -162,7 +162,7 @@ export function MoneyNotesAnimation() {
           }}
         >
           <img
-            src="/branding/nota-50.svg"
+            src="/branding/nota-50.png"
             alt=""
             draggable={false}
             className="h-auto w-full select-none"
