@@ -149,6 +149,9 @@ export async function updateRewardStatusAction(input: {
 export async function updateRewardSettingsAction(input: {
  valorCentavos: number;
  prazoDias: number;
+ dataInicio?: string | null;
+ dataFim?: string | null;
+ ativa?: boolean;
 }): Promise<AdminActionResult> {
  if (!isSupabaseConfigured()) {
  return { status: "error", message: SETUP_REQUIRED_MESSAGE };
@@ -186,7 +189,10 @@ export async function updateRewardSettingsAction(input: {
  const { error } = await supabase.rpc("admin_atualizar_config_recompensa", {
  p_valor_centavos: input.valorCentavos,
  p_prazo_dias: input.prazoDias,
- });
+    p_data_inicio: input.dataInicio || null,
+    p_data_fim: input.dataFim || null,
+    p_ativa: input.ativa ?? true,
+  });
 
  if (error) {
  console.error("Erro ao atualizar configuração de recompensa:", error.message);

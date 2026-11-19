@@ -13,6 +13,12 @@ As migrations são executadas manualmente no **SQL Editor** do Supabase, em orde
 | 7 | `migrations/0007_admin_control.sql` | 0001–0006 |
 | 8 | `migrations/0008_cpf_opcional_indicacao.sql` | 0001–0007 |
 | 9 | `migrations/0009_cpf_opcional_coluna.sql` | 0001–0008 |
+| 10 | `migrations/0010_page_views.sql` | 0001–0009 |
+| 11 | `migrations/0011_status_granulares.sql` | 0001–0010 |
+| 12 | `migrations/0012_admin_usuarios.sql` | 0001–0011 |
+| 13 | `migrations/0013_campanha_datas.sql` | 0001–0012 |
+| 14 | `migrations/0014_campanha_config.sql` | 0001–0013 |
+| 15 | `migrations/0015_notificacoes.sql` | 0001–0014 |
 
 ## Cuidados
 

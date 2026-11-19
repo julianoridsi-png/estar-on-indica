@@ -57,9 +57,13 @@ function parseCurrencyToCents(input: string): number | null {
 export function RewardSettingsForm({
  valorCentavos,
  prazoDias,
+ dataInicio,
+ dataFim,
 }: {
  valorCentavos: number;
  prazoDias: number;
+ dataInicio?: string | null;
+ dataFim?: string | null;
 }) {
  const router = useRouter();
  const [valor, setValor] = useState(
@@ -68,6 +72,8 @@ export function RewardSettingsForm({
  : "",
  );
  const [prazo, setPrazo] = useState(String(prazoDias));
+ const [dataIni, setDataIni] = useState(dataInicio ?? "");
+ const [dataFimState, setDataFimState] = useState(dataFim ?? "");
  const [serverError, setServerError] = useState<string | null>(null);
  const [isPending, startTransition] = useTransition();
 
@@ -97,6 +103,8 @@ export function RewardSettingsForm({
  const result = await updateRewardSettingsAction({
  valorCentavos: parsedCentavos,
  prazoDias: prazoNumber,
+ dataInicio: dataIni || null,
+ dataFim: dataFimState || null,
  });
 
  if (result.status === "error") {
@@ -160,6 +168,25 @@ export function RewardSettingsForm({
  className="pl-9"
  />
  </div>
+ </FormField>
+ </div>
+
+ <div className="grid gap-4 sm:grid-cols-2">
+ <FormField label="Data de início da campanha" htmlFor="recompensa-inicio" hint="Opcional.">
+ <Input
+ id="recompensa-inicio"
+ type="date"
+ value={dataIni}
+ onChange={(e) => setDataIni(e.target.value)}
+ />
+ </FormField>
+ <FormField label="Data de encerramento" htmlFor="recompensa-fim" hint="Opcional.">
+ <Input
+ id="recompensa-fim"
+ type="date"
+ value={dataFimState}
+ onChange={(e) => setDataFimState(e.target.value)}
+ />
  </FormField>
  </div>
 

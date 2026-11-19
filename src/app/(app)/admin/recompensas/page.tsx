@@ -15,6 +15,7 @@ import { StatCard } from "@/shared/layout/stat-card";
 import { RewardSettingsForm, GenerateRewardsButton } from "@/features/administracao/components/reward-settings-form";
 import { RewardsTable } from "@/features/administracao/components/rewards-table";
 import { ExportExcelButton } from "@/features/administracao/components/export-excel-button";
+import { ExportCsvButton } from "@/features/administracao/components/export-csv-button";
 import { getCurrentSession } from "@/features/autenticacao/services/current";
 import { createClient } from "@/services/supabase/server";
 import { formatCurrencyBRL, formatNumberBR } from "@/shared/lib/format";
@@ -28,6 +29,8 @@ export const metadata: Metadata = {
 type SettingsRow = {
  recompensa_valor_centavos: number;
  prazo_pagamento_dias: number;
+ campanha_data_inicio: string | null;
+ campanha_data_fim: string | null;
 };
 
 export default async function AdminRewardsPage(
@@ -59,7 +62,7 @@ export default async function AdminRewardsPage(
  supabase.rpc("admin_listar_recompensas"),
  supabase
  .from("settings")
- .select("recompensa_valor_centavos, prazo_pagamento_dias")
+ .select("recompensa_valor_centavos, prazo_pagamento_dias, campanha_data_inicio, campanha_data_fim")
  .eq("id", 1)
  .maybeSingle(),
  ]);
@@ -126,6 +129,7 @@ export default async function AdminRewardsPage(
  </span>
  <GenerateRewardsButton />
  <ExportExcelButton />
+ <ExportCsvButton />
  </div>
  </div>
 
@@ -203,6 +207,8 @@ export default async function AdminRewardsPage(
  <RewardSettingsForm
  valorCentavos={settings?.recompensa_valor_centavos ?? 0}
  prazoDias={settings?.prazo_pagamento_dias ?? 30}
+ dataInicio={settings?.campanha_data_inicio}
+ dataFim={settings?.campanha_data_fim}
  />
  </div>
  </section>
