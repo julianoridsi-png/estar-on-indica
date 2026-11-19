@@ -58,7 +58,9 @@ type IndicatorName = {
  nome_completo: string;
 };
 
-export default async function AdminDashboardPage() {
+export default async function AdminDashboardPage(
+  props: PageProps<"/admin">,
+) {
  const session = await getCurrentSession();
 
  if (!session) redirect("/login?next=/admin");
@@ -68,10 +70,17 @@ export default async function AdminDashboardPage() {
  if (profile.tipo_usuario === "indicador") redirect("/painel");
 
  const isAdmin = profile.tipo_usuario === "admin";
+ const params = await props.searchParams;
+ const dataInicio = typeof params.inicio === "string" ? params.inicio : "";
+ const dataFim = typeof params.fim === "string" ? params.fim : "";
+
  const supabase = await createClient();
 
  const [statsResult, recentResult, indicatorsResult] = await Promise.all([
- supabase.rpc("get_admin_stats"),
+ supabase.rpc("get_admin_stats", {
+      p_data_inicio: dataInicio || null,
+      p_data_fim: dataFim || null,
+    }),
  supabase
  .from("referrals")
  .select(
@@ -171,6 +180,20 @@ export default async function AdminDashboardPage() {
  </Button>
  </div>
  </div>
+
+      <form action="/admin" method="get" className="flex flex-wrap items-end gap-3 rounded-2xl border border-border bg-card p-4 shadow-soft">
+        <div>
+          <label className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground uppercase">Data inicial</label>
+          <input type="date" name="inicio" defaultValue="${dataInicio}" className="mt-1 h-9 rounded-lg border border-border bg-card px-3 text-sm" />
+        </div>
+        <div>
+          <label className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground uppercase">Data final</label>
+          <input type="date" name="fim" defaultValue="${dataFim}" className="mt-1 h-9 rounded-lg border border-border bg-card px-3 text-sm" />
+        </div>
+        <button type="submit" className="h-9 rounded-lg bg-brand-500 px-4 text-sm font-semibold text-ink hover:bg-brand-400">
+          Filtrar
+        </button>
+      </form>
 
  {!stats ? (
  <Alert className="border-amber-300/70 bg-amber-50 text-amber-950">
