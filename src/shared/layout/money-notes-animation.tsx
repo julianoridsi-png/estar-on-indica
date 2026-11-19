@@ -17,15 +17,15 @@ type NoteConfig = {
 };
 
 const NOTES: NoteConfig[] = [
-  { id: 1, x: 8, y: 10, size: 150, depth: 0.2, rotation: -12, delay: 0 },
+  { id: 1, x: 92, y: 8, size: 150, depth: 0.2, rotation: -12, delay: 0 },
   { id: 2, x: 88, y: 15, size: 110, depth: 0.5, rotation: 8, delay: 0.4 },
-  { id: 3, x: 48, y: 5, size: 90, depth: 0.85, rotation: -6, delay: 0.8 },
+  { id: 3, x: 70, y: 78, size: 90, depth: 0.85, rotation: -6, delay: 0.8 },
   { id: 4, x: 75, y: 55, size: 170, depth: 0.15, rotation: 15, delay: 0.2 },
   { id: 5, x: 16, y: 65, size: 125, depth: 0.45, rotation: -18, delay: 0.6 },
   { id: 6, x: 94, y: 40, size: 85, depth: 0.75, rotation: 22, delay: 1.0 },
   { id: 7, x: 3, y: 35, size: 140, depth: 0.3, rotation: -8, delay: 0.1 },
   { id: 8, x: 58, y: 80, size: 110, depth: 0.6, rotation: 12, delay: 0.5 },
-  { id: 9, x: 32, y: 20, size: 75, depth: 1.0, rotation: -20, delay: 1.2 },
+  { id: 9, x: 88, y: 28, size: 75, depth: 1.0, rotation: -20, delay: 1.2 },
   { id: 10, x: 80, y: 75, size: 145, depth: 0.25, rotation: 18, delay: 0.3 },
 ];
 
@@ -43,7 +43,7 @@ export function MoneyNotesAnimation() {
     if (reducedMotion) return;
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const visibleNotes = isMobile ? NOTES.slice(0, 4) : NOTES;
+    const visibleNotes = isMobile ? NOTES.slice(0, 3) : NOTES;
 
     // Set up mouse tracking
     const handleMouse = (e: MouseEvent) => {
@@ -136,7 +136,7 @@ export function MoneyNotesAnimation() {
   }, []);
 
   const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
-  const visibleNotes = isMobile ? NOTES.slice(0, 4) : NOTES;
+  const visibleNotes = isMobile ? NOTES.slice(0, 3) : NOTES;
 
   return (
     <div
