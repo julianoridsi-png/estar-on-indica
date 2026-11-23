@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle, ShieldCheck } from "lucide-react";
 import { Logo } from "@/shared/brand/logo";
 import { getPublicSettings } from "@/shared/lib/settings";
 
@@ -62,6 +62,17 @@ export async function SiteFooter() {
  <Link href="/#duvidas" className="transition-colors hover:text-white">
  Perguntas frequentes
  </Link>
+ </li>
+ <li>
+ <a
+ href="https://wa.me/5511985708840?text=Ol%C3%A1!%20Vi%20o%20programa%20Estar%20On%20Indica%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+ target="_blank"
+ rel="noopener noreferrer"
+ className="inline-flex items-center gap-1 transition-colors hover:text-white"
+ >
+ Falar pelo WhatsApp
+ <MessageCircle className="size-3.5" aria-hidden="true" />
+ </a>
  </li>
  {settings.site_url ? (
  <li>

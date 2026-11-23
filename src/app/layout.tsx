@@ -18,7 +18,7 @@ const sora = Sora({
 
 const siteUrl =
  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
- "http://localhost:3000";
+ "https://estar-on-indica.julianoridsi.workers.dev";
 
 export const metadata: Metadata = {
  metadataBase: new URL(siteUrl),
@@ -46,6 +46,21 @@ export const metadata: Metadata = {
  title: "Estar On Indica | Indique amigos e acompanhe suas recompensas",
  description:
  "O programa de indicação da Estar On Internet. Indique, acompanhe o status em tempo real e consulte suas recompensas.",
+ images: [
+ {
+ url: "/branding/og-image.png",
+ width: 1200,
+ height: 630,
+ alt: "Estar On Indica — Indique e Ganhe R$ 50",
+ },
+ ],
+ },
+ twitter: {
+ card: "summary_large_image",
+ title: "Estar On Indica | Indique amigos e acompanhe suas recompensas",
+ description:
+ "O programa de indicação da Estar On Internet. Indique, acompanhe o status em tempo real e consulte suas recompensas.",
+ images: ["/branding/og-image.png"],
  },
  robots: {
  index: true,
@@ -64,7 +79,7 @@ export const viewport: Viewport = {
  width: "device-width",
  initialScale: 1,
  maximumScale: 5,
- themeColor: "#0b5cff",
+ themeColor: "#D2DD3A",
  colorScheme: "light",
 };
 

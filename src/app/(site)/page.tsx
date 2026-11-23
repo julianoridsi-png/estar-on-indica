@@ -23,33 +23,35 @@ import {
  UserCheck,
  UserPlus,
  Wallet,
+ Wifi,
  Zap,
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { TrackingPreview } from "@/shared/marketing/tracking-preview";
+import { WhatsAppButton } from "@/shared/ui/whatsapp-button";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { REFERRAL_STATUS_OPTIONS } from "@/features/indicacoes/services/status";
 
 const TRUST_ITEMS = [
  {
- icon: ShieldCheck,
- title: "Segurança e LGPD",
- description: "CPF criptografado e dados mascarados nas telas.",
- },
- {
- icon: Zap,
- title: "Status em tempo real",
- description: "Acompanhe cada movimentação da sua indicação.",
- },
- {
  icon: Gift,
- title: "Recompensas claras",
- description: "Critérios e prazos definidos pela campanha vigente.",
+ title: "Participação gratuita",
+ description: "Cadastre-se e indique sem custos. A Estar On não cobra taxa.",
  },
  {
- icon: Smartphone,
- title: "Direto no celular",
- description: "Plataforma responsiva e instalável como aplicativo.",
+ icon: Clock3,
+ title: "Acompanhamento em tempo real",
+ description: "Veja cada etapa da sua indicação com data e responsável.",
+ },
+ {
+ icon: ShieldCheck,
+ title: "Dados protegidos (LGPD)",
+ description: "CPF criptografado e exibido de forma mascarada.",
+ },
+ {
+ icon: Wallet,
+ title: "Pagamento via Pix",
+ description: "Recompensas liberadas diretamente na sua chave Pix.",
  },
 ];
 
@@ -223,13 +225,17 @@ export default function HomePage() {
  <h1 className="mt-6 font-heading text-[2.45rem] leading-[1.05] font-bold text-[#31393F] sm:text-5xl xl:text-[3.6rem]">
  A internet conecta.
  <br />
- <span className="text-brand-300">A EstarOn recompensa!!!</span>
+ <span className="text-brand-300">A Estar On recompensa!</span>
  </h1>
 
  <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-gray-600 sm:text-base">
  Indique o melhor provedor de internet da região e ganhe R$ 50 por
- cada amigo que contratar a EstarOn!
+ cada amigo que contratar a Estar On!
  </p>
+ <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-bold text-brand-800 shadow-soft">
+ <Sparkles className="size-4 text-brand-600" aria-hidden="true" />
+ R$ 50 por amigo que contratar
+ </span>
 
  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
  <Button asChild size="lg" className="h-12 bg-brand-500 px-7 text-ink hover:bg-brand-400">
@@ -312,13 +318,9 @@ export default function HomePage() {
  Como funciona o Indique e Ganhe
  </h2>
  <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
- Indique e ganhe com a Estar On! Indique um amigo, familiar ou conhecido
- interessado em contratar nossa internet. Nossa equipe entrará em contato
- para verificar a disponibilidade e a viabilidade técnica. Se houver
- viabilidade, a contratação será realizada e a instalação concluída. Após
- o pagamento da primeira mensalidade, sua bonificação será liberada conforme
- as regras da campanha vigente. É simples: você indica, nós cuidamos do
- processo e você recebe sua recompensa!
+ Indique um amigo, familiar ou conhecido interessado em contratar a Estar On.
+ Nossa equipe cuida do contato, da análise de viabilidade e da instalação.
+ Após o pagamento da primeira mensalidade, sua bonificação é liberada conforme a campanha vigente.
  </p>
  </div>
 
@@ -438,22 +440,39 @@ export default function HomePage() {
  </span>
  </div>
 
- <ul className="mt-5 grid gap-x-4 gap-y-2.5 sm:grid-cols-2">
- {REFERRAL_STATUS_OPTIONS.map((status) => (
- <li
- key={status.value}
- className="flex items-center gap-2.5 rounded-lg border border-white/5 bg-white/[0.03] px-2.5 py-2"
- >
+ <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-start">
+ {[
+ { label: "Indicação", desc: "Cadastro recebido", icon: Send, done: true },
+ { label: "Análise", desc: "Triagem e viabilidade", icon: Clock3, done: true },
+ { label: "Contrato", desc: "Contratação aprovada", icon: BadgeCheck, done: true },
+ { label: "Instalação", desc: "Serviço instalado", icon: Wifi, done: true },
+ { label: "1ª mensalidade", desc: "Pagamento confirmado", icon: CreditCard, done: false },
+ { label: "Bonificação", desc: "Recompensa liberada", icon: Wallet, done: false },
+ ].map((step, index, arr) => {
+ const Icon = step.icon;
+ return (
+ <>
+ <div className="flex items-center gap-3 sm:flex-col sm:items-center sm:text-center sm:flex-1">
  <span
- className={`size-2 shrink-0 rounded-full ${status.dotClass}`}
- aria-hidden="true"
- />
- <span className="text-[11px] font-medium text-slate-200">
- {status.label}
+ className={`grid size-10 shrink-0 place-items-center rounded-full ring-1 ${step.done ? "bg-brand-500 text-ink ring-brand-400" : "bg-white/10 text-slate-300 ring-white/20"}`}
+ >
+ <Icon className="size-4" aria-hidden="true" />
  </span>
- </li>
- ))}
- </ul>
+ <div className="min-w-0 sm:mt-2">
+ <p className="text-xs font-semibold text-white">{step.label}</p>
+ <p className="text-[10px] text-slate-400">{step.desc}</p>
+ </div>
+ </div>
+ {index < arr.length - 1 ? (
+ <span
+ aria-hidden="true"
+ className="hidden h-px flex-1 self-center bg-white/15 sm:block"
+ />
+ ) : null}
+ </>
+ );
+ })}
+ </div>
 
  <p className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4 text-[10px] text-slate-400">
  <History className="size-3.5 text-[#D2DD3A]" aria-hidden="true" />
@@ -605,6 +624,47 @@ export default function HomePage() {
  </div>
  </section>
 
+ <section id="exemplo" className="scroll-mt-24 bg-background py-16 lg:py-24">
+  <div className="container-page">
+   <div className="mx-auto max-w-2xl text-center">
+    <p className="text-xs font-bold tracking-[0.22em] text-brand-600 uppercase">
+     Exemplo ilustrativo
+    </p>
+    <h2 className="mt-3 font-heading text-3xl font-bold text-ink sm:text-4xl">
+     Veja como funciona na prática
+    </h2>
+    <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+     Os valores são definidos pela campanha vigente. Abaixo, um exemplo simplificado.
+    </p>
+   </div>
+   <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+    <div className="grid gap-4 sm:grid-cols-3">
+     <div className="rounded-xl border border-border bg-background p-4 text-center">
+      <p className="text-[10px] font-bold tracking-[0.16em] text-muted-foreground uppercase">
+       Indicações
+      </p>
+      <p className="mt-2 font-heading text-3xl font-bold text-ink">3</p>
+     </div>
+     <div className="rounded-xl border border-border bg-background p-4 text-center">
+      <p className="text-[10px] font-bold tracking-[0.16em] text-muted-foreground uppercase">
+       Valor por indicação
+      </p>
+      <p className="mt-2 font-heading text-3xl font-bold text-ink">R$ 50</p>
+     </div>
+     <div className="rounded-xl border border-brand-200 bg-brand-50 p-4 text-center">
+      <p className="text-[10px] font-bold tracking-[0.16em] text-brand-700 uppercase">
+       Total
+      </p>
+      <p className="mt-2 font-heading text-3xl font-bold text-brand-800">R$ 150</p>
+     </div>
+    </div>
+    <p className="mt-5 text-center text-[11px] text-muted-foreground">
+     Exemplo ilustrativo. A liberação depende da validação da equipe Estar On e das regras da campanha vigente.
+    </p>
+   </div>
+  </div>
+  </section>
+
  <section id="duvidas" className="scroll-mt-24 bg-background py-16 lg:py-24">
  <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
  <div>
@@ -709,6 +769,7 @@ export default function HomePage() {
  </div>
  </div>
  </section>
+ <WhatsAppButton />
  </>
  );
 }

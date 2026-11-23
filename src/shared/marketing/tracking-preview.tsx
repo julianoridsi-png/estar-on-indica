@@ -24,6 +24,7 @@ export function TrackingPreview() {
  />
 
  <div className="relative rounded-[26px] border border-white/70 bg-card p-5 shadow-lift sm:p-6">
+ <div className="mx-auto mb-3 h-1.5 w-16 rounded-full bg-ink/10" aria-hidden="true" />
  <div className="flex items-center justify-between gap-3">
  <div>
  <p className="text-[10px] font-bold tracking-[0.2em] text-brand-600 uppercase">
