@@ -190,7 +190,7 @@ export default function HomePage() {
  return (
  <>
  <div className="relative">
- <div className="overflow-hidden">
+ <div className="overflow-hidden rounded-2xl shadow-soft">
  <Image
  src="/branding/indique-ganhe-banner.png"
  alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
@@ -322,7 +322,9 @@ export default function HomePage() {
  </p>
  </div>
 
- <div className="mt-10 grid gap-5 lg:grid-cols-3">
+ <div className="relative mt-10">
+   <div aria-hidden="true" className="pointer-events-none absolute left-8 right-8 top-9 hidden h-px bg-gradient-to-r from-transparent via-brand-300 to-transparent lg:block" />
+   <div className="grid gap-5 lg:grid-cols-3">
  {HOW_IT_STEPS.map((step) => {
  const Icon = step.icon;
  return (
@@ -354,6 +356,7 @@ export default function HomePage() {
  </article>
  );
  })}
+ </div>
  </div>
 
  <div className="mt-9 flex justify-center">

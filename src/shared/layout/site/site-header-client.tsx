@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
  ArrowRight,
  LayoutDashboard,
@@ -39,9 +39,17 @@ export function SiteHeaderClient({
  isAdmin?: boolean;
 }) {
  const [open, setOpen] = useState(false);
+ const [scrolled, setScrolled] = useState(false);
+
+ useEffect(() => {
+  const onScroll = () => setScrolled(window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  return () => window.removeEventListener("scroll", onScroll);
+ }, []);
 
  return (
- <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
+ <header className={`sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl transition-shadow duration-200 ${scrolled ? "shadow-soft" : ""}`}>
  <div className="container-page flex h-[72px] items-center justify-between gap-4">
  <Logo logoUrl={logoUrl} companyName={companyName} />
 
