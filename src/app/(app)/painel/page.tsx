@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
+import { CopyLinkButton } from "@/shared/ui/copy-link-button";
 import { StatCard } from "@/shared/layout/stat-card";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { getCurrentSession } from "@/features/autenticacao/services/current";
@@ -130,6 +131,7 @@ export default async function IndicatorDashboardPage() {
  Compartilhar programa
  </a>
  </Button>
+  <CopyLinkButton url={`${siteUrl}/cadastro`} label="Copiar link" />
  <Button asChild size="sm" className="h-9">
  <Link href="/indicacoes/nova">
  <Send className="size-3.5" aria-hidden="true" />
