@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { TrackingPreview } from "@/shared/marketing/tracking-preview";
+import { HeroCarouselServer } from "@/features/banners/components/hero-carousel-server";
 import { WhatsAppButton } from "@/shared/ui/whatsapp-button";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { REFERRAL_STATUS_OPTIONS } from "@/features/indicacoes/services/status";
@@ -192,16 +193,7 @@ export default function HomePage() {
  return (
  <>
  <div className="relative">
- <div className="overflow-hidden rounded-2xl shadow-soft">
- <Image
- src="/branding/indique-ganhe-banner.png"
- alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
- width={1920}
- height={650}
- className="h-auto w-full object-cover"
- priority
- />
- </div>
+ <HeroCarouselServer />
  <section className="hero-glow relative overflow-hidden bg-white">
  <div
   aria-hidden="true"
