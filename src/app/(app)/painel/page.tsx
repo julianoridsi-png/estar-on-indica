@@ -92,7 +92,7 @@ export default async function IndicatorDashboardPage() {
  );
 
  return (
- <div className="space-y-6">
+ <div className="space-y-6 animate-rise">
  <div className="overflow-hidden rounded-2xl border border-border shadow-soft">
  <Image
  src="/branding/indique-ganhe-banner.png"
@@ -278,7 +278,7 @@ export default async function IndicatorDashboardPage() {
  {referrals.map((referral) => (
  <li
  key={referral.id}
- className="flex flex-col gap-2 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between"
+ className="flex flex-col gap-2 px-5 py-3.5 transition-colors hover:bg-muted/60 sm:flex-row sm:items-center sm:justify-between"
  >
  <div className="min-w-0">
  <p className="truncate text-sm font-semibold text-ink">
