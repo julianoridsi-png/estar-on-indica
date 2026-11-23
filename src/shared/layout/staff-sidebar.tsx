@@ -9,6 +9,7 @@ import {
  LogOut,
  Plug,
  Workflow,
+ BarChart3,
  Menu,
  Send,
  ShieldCheck,
@@ -40,6 +41,7 @@ const NAV_ITEMS: NavItem[] = [
  { label: "Usuários", href: "/admin/usuarios", icon: UserCog },
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet, adminOnly: true },
  { label: "Integrações", href: "/admin/integracoes", icon: Plug, adminOnly: true },
+ { label: "Analytics", href: "/admin/analytics", icon: BarChart3, adminOnly: true },
  { label: "Automações", href: "/admin/automacoes", icon: Workflow, adminOnly: true },
  { label: "Configurar MFA", href: "/configurar-mfa", icon: ShieldCheck, adminOnly: true },
 ];

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
  LayoutDashboard,
  Plug,
+ BarChart3,
  Workflow,
  QrCode,
  Send,
@@ -39,6 +40,7 @@ const STAFF_ITEMS: NavItem[] = [
 const ADMIN_EXTRA: NavItem[] = [
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet },
  { label: "Integrações", href: "/admin/integracoes", icon: Plug },
+ { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
  { label: "Automações", href: "/admin/automacoes", icon: Workflow },
  { label: "MFA", href: "/configurar-mfa", icon: ShieldCheck },
 ];
