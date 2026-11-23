@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
  LayoutDashboard,
+ Plug,
  QrCode,
  Send,
  Users,
@@ -36,6 +37,7 @@ const STAFF_ITEMS: NavItem[] = [
 
 const ADMIN_EXTRA: NavItem[] = [
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet },
+ { label: "Integrações", href: "/admin/integracoes", icon: Plug },
  { label: "MFA", href: "/configurar-mfa", icon: ShieldCheck },
 ];
 

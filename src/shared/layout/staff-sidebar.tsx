@@ -7,6 +7,7 @@ import {
  ArrowLeft,
  LayoutDashboard,
  LogOut,
+ Plug,
  Menu,
  Send,
  ShieldCheck,
@@ -37,6 +38,7 @@ const NAV_ITEMS: NavItem[] = [
  { label: "Indicadores", href: "/admin/indicadores", icon: Users },
  { label: "Usuários", href: "/admin/usuarios", icon: UserCog },
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet, adminOnly: true },
+ { label: "Integrações", href: "/admin/integracoes", icon: Plug, adminOnly: true },
  { label: "Configurar MFA", href: "/configurar-mfa", icon: ShieldCheck, adminOnly: true },
 ];
 
