@@ -52,12 +52,14 @@ export function UsersTable({ users }: { users: AdminUser[] }) {
   const handleChangeRole = (userId: string, newRole: string) => {
     startTransition(async () => {
       const supabase = createClient();
-      const { error } = await supabase
-        .from("profiles")
-        .update({ tipo_usuario: newRole })
-        .eq("id", userId);
-      if (error) {
-        toast.error("Não foi possível alterar o perfil", { description: error.message });
+      const { data, error } = await supabase.rpc("admin_alterar_permissao_usuario", {
+        p_user_id: userId,
+        p_novo_papel: newRole,
+      });
+      if (error || !data?.ok) {
+        toast.error("Não foi possível alterar o perfil", {
+          description: error?.message ?? "Operação não autorizada.",
+        });
         return;
       }
       toast.success("Perfil atualizado");
@@ -68,12 +70,14 @@ export function UsersTable({ users }: { users: AdminUser[] }) {
   const handleToggleStatus = (userId: string, currentStatus: string) => {
     startTransition(async () => {
       const supabase = createClient();
-      const { error } = await supabase
-        .from("profiles")
-        .update({ status: currentStatus === "ativo" ? "inativo" : "ativo" })
-        .eq("id", userId);
-      if (error) {
-        toast.error("Não foi possível alterar o status", { description: error.message });
+      const { data, error } = await supabase.rpc("admin_alterar_status_usuario", {
+        p_user_id: userId,
+        p_novo_status: currentStatus === "ativo" ? "inativo" : "ativo",
+      });
+      if (error || !data?.ok) {
+        toast.error("Não foi possível alterar o status", {
+          description: error?.message ?? "Operação não autorizada.",
+        });
         return;
       }
       toast.success("Status atualizado");

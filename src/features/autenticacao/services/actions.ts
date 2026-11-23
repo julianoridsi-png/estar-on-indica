@@ -322,6 +322,16 @@ export async function requestPasswordResetAction(
  };
  }
  console.error("Erro ao solicitar recuperação:", error.message);
+ const lower = error.message.toLowerCase();
+ const looksLikeUnknownEmail =
+   lower.includes("not found") || lower.includes("user not found");
+ if (!looksLikeUnknownEmail) {
+   return {
+     status: "error",
+     message:
+       "Não foi possível enviar o link de recuperação agora. Tente novamente mais tarde.",
+   };
+ }
  }
 
  // Resposta genérica para não revelar se o e-mail está cadastrado.
