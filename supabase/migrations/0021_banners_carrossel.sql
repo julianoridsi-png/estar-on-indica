@@ -85,3 +85,16 @@ create policy banners_storage_delete
   using (bucket_id = 'banners' and private.is_admin());
 
 comment on table public.banners is 'Banners do Hero Carousel (Estar On Indica 5.0). Uma integração só é publicada após configuração real.';
+
+-- Seed: banner oficial da campanha (visível por padrão no carrossel).
+-- Inserido apenas se a tabela estiver vazia, para não duplicar.
+insert into public.banners (titulo, descricao, imagem_url, link_url, botao_texto, ativo, ordem)
+select
+  'Indique e Ganhe R$ 50',
+  'Indique o melhor provedor de internet da região e ganhe R$ 50 por cada amigo que contratar a Estar On!',
+  '/branding/indique-ganhe-banner.png',
+  '/cadastro',
+  'Quero participar',
+  true,
+  0
+where not exists (select 1 from public.banners);

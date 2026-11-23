@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { TrackingPreview } from "@/shared/marketing/tracking-preview";
+import { BenefitsGrid } from "@/features/beneficios/components/benefits-grid";
 import { HeroCarouselServer } from "@/features/banners/components/hero-carousel-server";
 import { WhatsAppButton } from "@/shared/ui/whatsapp-button";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
@@ -653,6 +654,25 @@ export default function HomePage() {
     <p className="mt-5 text-center text-[11px] text-muted-foreground">
      Exemplo ilustrativo. A liberação depende da validação da equipe Estar On e das regras da campanha vigente.
     </p>
+   </div>
+  </div>
+  </section>
+
+ <section id="beneficios" className="scroll-mt-24 bg-card py-16 lg:py-24">
+  <div className="container-page">
+   <div className="mx-auto max-w-2xl text-center">
+    <p className="text-xs font-bold tracking-[0.22em] text-brand-600 uppercase">
+     ON Benefits
+    </p>
+    <h2 className="mt-3 font-heading text-3xl font-bold text-ink sm:text-4xl">
+     Benefícios exclusivos
+    </h2>
+    <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+     Vantagens e campanhas especiais para clientes Estar On.
+    </p>
+   </div>
+   <div className="mt-10">
+    <BenefitsGrid />
    </div>
   </div>
   </section>
