@@ -287,6 +287,96 @@ export default async function AdminDashboardPage(
  />
  </section>
 
+ <section aria-label="Indicadores de desempenho" className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+  <StatCard
+   label="Taxa de conversão"
+   value={
+    stats && stats.total_indicacoes > 0
+     ? `${Math.round((stats.contratos_aprovados / stats.total_indicacoes) * 100)}%`
+     : "—"
+   }
+   description="Contratos aprovados sobre o total de indicações."
+   icon={TrendingUp}
+   tone="emerald"
+  />
+  <StatCard
+   label="Taxa de instalação"
+   value={
+    stats && stats.total_indicacoes > 0
+     ? `${Math.round((stats.instalados / stats.total_indicacoes) * 100)}%`
+     : "—"
+   }
+   description="Indicações concluídas com instalação."
+   icon={Wifi}
+   tone="cyan"
+  />
+  <StatCard
+   label="Custo por conversão"
+   value={
+    stats && stats.instalados > 0
+     ? formatCurrencyBRL(stats.valor_recompensas_pagas_centavos / 100 / stats.instalados)
+     : "—"
+   }
+   description="Recompensas pagas por indicação instalada."
+   icon={Wallet}
+   tone="violet"
+  />
+  <StatCard
+   label="Ticket médio de recompensa"
+   value={
+    stats && stats.recompensas_pagas > 0
+     ? formatCurrencyBRL(stats.valor_recompensas_pagas_centavos / 100 / stats.recompensas_pagas)
+     : "—"
+   }
+   description="Valor médio por recompensa paga."
+   icon={Gift}
+   tone="amber"
+  />
+ </section>
+
+ <section aria-label="Alertas operacionais" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+  <div className="flex items-center gap-2.5">
+   <span className="grid size-9 place-items-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-amber-200">
+    <CircleAlert className="size-4.5" aria-hidden="true" />
+   </span>
+   <div>
+    <h2 className="font-heading text-sm font-bold text-ink">Alertas operacionais</h2>
+    <p className="text-[10px] text-muted-foreground">Situações que merecem atenção.</p>
+   </div>
+  </div>
+  <ul className="mt-4 space-y-2">
+   {indicadoresSemPix > 0 ? (
+    <li className="flex items-center justify-between gap-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+     <span>{formatNumberBR(indicadoresSemPix)} indicador(es) sem chave PIX cadastrada.</span>
+     <Button asChild variant="outline" size="sm" className="h-7 text-[10px]">
+      <Link href="/admin/indicadores?pix=pendente">Ver</Link>
+     </Button>
+    </li>
+   ) : null}
+   {stats && stats.recompensas_pendentes > 0 ? (
+    <li className="flex items-center justify-between gap-3 rounded-xl border border-brand-200 bg-brand-50 px-3 py-2 text-xs text-brand-900">
+     <span>{formatNumberBR(stats.recompensas_pendentes)} recompensa(s) pendente(s) de liberação.</span>
+     <Button asChild variant="outline" size="sm" className="h-7 text-[10px]">
+      <Link href="/admin/recompensas?status=pendente">Ver</Link>
+     </Button>
+    </li>
+   ) : null}
+   {stats && stats.recompensas_disponiveis > 0 ? (
+    <li className="flex items-center justify-between gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
+     <span>{formatNumberBR(stats.recompensas_disponiveis)} recompensa(s) disponível(is) para pagamento.</span>
+     <Button asChild variant="outline" size="sm" className="h-7 text-[10px]">
+      <Link href="/admin/recompensas?status=disponivel">Ver</Link>
+     </Button>
+    </li>
+   ) : null}
+   {indicadoresSemPix === 0 && (!stats || (stats.recompensas_pendentes === 0 && stats.recompensas_disponiveis === 0)) ? (
+    <li className="rounded-xl border border-dashed border-border bg-background px-3 py-4 text-center text-xs text-muted-foreground">
+     Nenhum alerta operacional no momento.
+    </li>
+   ) : null}
+  </ul>
+ </section>
+
  <div className="grid gap-5 lg:grid-cols-[1.6fr_1fr]">
  <section className="rounded-2xl border border-border bg-card p-5 shadow-soft">
  <div className="flex flex-wrap items-start justify-between gap-2">
