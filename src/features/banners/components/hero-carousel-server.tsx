@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { createClient } from "@/services/supabase/server";
 import { HeroCarousel } from "./hero-carousel";
 import type { Banner } from "../types";
@@ -19,19 +18,24 @@ export async function HeroCarouselServer() {
   return true;
  });
 
+ // Fallback: exibe o banner oficial da campanha como slide único
+ // até que o administrador cadastre banners no gerenciador.
  if (banners.length === 0) {
-  return (
-   <div className="overflow-hidden rounded-2xl shadow-soft">
-    <Image
-     src="/branding/indique-ganhe-banner.png"
-     alt="Estar On faz o Pix — Indique e Ganhe R$ 50,00"
-     width={1920}
-     height={650}
-     className="h-auto w-full object-cover"
-     priority
-    />
-   </div>
-  );
+  const fallback: Banner = {
+   id: "fallback-campanha",
+   titulo: "Indique e Ganhe R$ 50",
+   descricao: "Indique o melhor provedor de internet da região e ganhe R$ 50 por cada amigo que contratar a Estar On!",
+   imagem_url: "/branding/indique-ganhe-banner.png",
+   link_url: "/cadastro",
+   botao_texto: "Quero participar",
+   data_inicio: null,
+   data_fim: null,
+   ativo: true,
+   ordem: 0,
+   created_at: new Date().toISOString(),
+   updated_at: new Date().toISOString(),
+  };
+  return <HeroCarousel banners={[fallback]} />;
  }
 
  return <HeroCarousel banners={banners} />;

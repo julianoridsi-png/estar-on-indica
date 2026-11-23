@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+ Bell,
  LayoutDashboard,
  Plug,
  BarChart3,
@@ -32,6 +33,7 @@ const INDICATOR_ITEMS: NavItem[] = [
  { label: "Painel", href: "/painel", icon: LayoutDashboard },
  { label: "Minhas indicações", href: "/indicacoes", icon: Send },
  { label: "Recebimentos", href: "/recebimentos", icon: QrCode },
+ { label: "Notificações", href: "/notificacoes", icon: Bell },
  { label: "Recompensas", href: "/recompensas", icon: Trophy },
 ];
 

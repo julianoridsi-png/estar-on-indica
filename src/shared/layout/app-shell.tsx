@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
 import { PageTracker } from "@/features/administracao/components/page-tracker";
 import { AppNav } from "@/shared/layout/app-nav";
+import { NotificationBell } from "@/shared/layout/notification-bell";
 import { Logo } from "@/shared/brand/logo";
 import { StaffSidebar } from "@/shared/layout/staff-sidebar";
 import { signOutAction } from "@/features/autenticacao/services/actions";
@@ -85,6 +86,8 @@ export async function AppShell({
         Site
        </Link>
       </Button>
+
+      <NotificationBell />
 
       <div className="flex items-center gap-2 rounded-full border border-border bg-card py-1 pr-3 pl-1">
        <Avatar className="size-8">

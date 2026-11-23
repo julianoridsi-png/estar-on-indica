@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
  ArrowLeft,
+ Bell,
  LayoutDashboard,
  LogOut,
  Plug,
@@ -24,6 +25,7 @@ import {
 import { Avatar, AvatarFallback } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
 import { Logo } from "@/shared/brand/logo";
+import { NotificationBell } from "@/shared/layout/notification-bell";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/shared/ui/sheet";
 import { signOutAction } from "@/features/autenticacao/services/actions";
 import { getInitials, type ProfileSummary, type TipoUsuario } from "@/features/autenticacao/services/queries";
@@ -44,6 +46,7 @@ const NAV_ITEMS: NavItem[] = [
  { label: "Usuários", href: "/admin/usuarios", icon: UserCog },
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet, adminOnly: true },
  { label: "Integrações", href: "/admin/integracoes", icon: Plug, adminOnly: true },
+ { label: "Notificações", href: "/notificacoes", icon: Bell, adminOnly: false },
  { label: "Benefícios", href: "/admin/beneficios", icon: Gift, adminOnly: true },
  { label: "Clientes", href: "/admin/clientes", icon: UserRound, adminOnly: true },
  { label: "Analytics", href: "/admin/analytics", icon: BarChart3, adminOnly: true },
@@ -120,6 +123,7 @@ export function StaffSidebar({
    {/* Mobile top bar */}
    <header className="sticky top-0 z-40 flex items-center justify-between gap-3 border-b border-border/80 bg-card/90 px-4 py-3 backdrop-blur-xl lg:hidden">
     <Logo logoUrl={null} companyName={companyName} className="scale-90 origin-left" />
+    <NotificationBell />
     <Sheet open={open} onOpenChange={setOpen}>
      <SheetTrigger asChild>
       <Button variant="ghost" size="icon" aria-label="Abrir menu">
@@ -147,10 +151,11 @@ export function StaffSidebar({
        {getInitials(profile.nome_completo)}
       </AvatarFallback>
      </Avatar>
-     <div className="min-w-0 leading-tight">
+     <div className="min-w-0 flex-1 leading-tight">
       <p className="truncate text-xs font-semibold text-white">{profile.nome_completo}</p>
       <p className="text-[9px] uppercase tracking-wide text-slate-400">{ROLE_LABEL[profile.tipo_usuario]}</p>
      </div>
+     <NotificationBell />
     </div>
     {navContent}
    </aside>
