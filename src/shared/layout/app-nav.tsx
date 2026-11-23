@@ -8,6 +8,7 @@ import {
  BarChart3,
  Workflow,
  QrCode,
+ Trophy,
  Send,
  Users,
  UserCog,
@@ -28,6 +29,7 @@ const INDICATOR_ITEMS: NavItem[] = [
  { label: "Painel", href: "/painel", icon: LayoutDashboard },
  { label: "Minhas indicações", href: "/indicacoes", icon: Send },
  { label: "Recebimentos", href: "/recebimentos", icon: QrCode },
+ { label: "Recompensas", href: "/recompensas", icon: Trophy },
 ];
 
 const STAFF_ITEMS: NavItem[] = [
