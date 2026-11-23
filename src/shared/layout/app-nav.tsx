@@ -14,6 +14,7 @@ import {
  Users,
  UserCog,
  Wallet,
+ Shield,
  ShieldCheck,
  type LucideIcon,
 } from "lucide-react";

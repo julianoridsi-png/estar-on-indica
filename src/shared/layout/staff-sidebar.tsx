@@ -12,6 +12,7 @@ import {
  BarChart3,
  Menu,
  Send,
+ Shield,
  ShieldCheck,
  UserCog,
  UserRound,
@@ -46,6 +47,7 @@ const NAV_ITEMS: NavItem[] = [
  { label: "Analytics", href: "/admin/analytics", icon: BarChart3, adminOnly: true },
  { label: "Automações", href: "/admin/automacoes", icon: Workflow, adminOnly: true },
  { label: "Configurar MFA", href: "/configurar-mfa", icon: ShieldCheck, adminOnly: true },
+ { label: "Segurança", href: "/admin/seguranca", icon: Shield, adminOnly: true },
 ];
 
 function isActive(pathname: string, href: string) {

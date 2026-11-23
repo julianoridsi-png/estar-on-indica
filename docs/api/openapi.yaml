@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: Estar On Indica API
+  version: 4.0.0
+  description: |
+    API interna da plataforma Estar On Indica (Next.js App Router + Supabase).
+    Endpoints server-side e RPCs do Supabase. Todas as operações mutáveis exigem
+    sessão autenticada e respeitam RLS/permissões por perfil.
+  contact:
+    name: Estar On
+    url: https://www.estaron.com.br
+
+servers:
+  - url: https://estar-on-indica.julianoridsi.workers.dev
+    description: Produção (Cloudflare Workers)
+  - url: http://localhost:3000
+    description: Desenvolvimento
+
+tags:
+  - name: Auth
+  - name: Indicações
+  - name: Recompensas
+  - name: Admin
+  - name: Integrações
+  - name: Automações
+  - name: Gamificação
+
+paths:
+  /auth/callback:
+    get:
+      tags: [Auth]
+      summary: Callback PKCE (troca code por sessão)
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema: { type: string }
+        - name: next
+          in: query
+          schema: { type: string, default: /painel }
+      responses:
+        "302": { description: Redirect para next ou /login?error=link_invalido }
+
+  /auth/confirm:
+    get:
+      tags: [Auth]
+      summary: Confirmação via token_hash (signup, recovery, invite, magiclink)
+      parameters:
+        - name: token_hash
+          in: query
+          required: true
+          schema: { type: string }
+        - name: type
+          in: query
+          required: true
+          schema: { type: string, enum: [signup, invite, magiclink, recovery, email_change, email] }
+        - name: next
+          in: query
+          schema: { type: string }
+      responses:
+        "302": { description: Redirect para next ou /login?error=link_invalido }
+
+  /painel:
+    get:
+      tags: [Indicações]
+      summary: Dashboard do indicador
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Página HTML (server-rendered) }
+        "302": { description: Redirect para /login se não autenticado }
+
+  /indicacoes/nova:
+    get:
+      tags: [Indicações]
+      summary: Formulário de nova indicação
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Formulário de cadastro de indicação }
+
+  /admin:
+    get:
+      tags: [Admin]
+      summary: Central de controle (dashboard administrativo)
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Dashboard com KPIs, gráficos, alertas }
+        "302": { description: Redirect se não autorizado }
+
+  /admin/integracoes:
+    get:
+      tags: [Integrações]
+      summary: Connect Hub — central de integrações
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Lista de conectores com status }
+
+  /admin/automacoes:
+    get:
+      tags: [Automações]
+      summary: Automation Studio — construtor visual de fluxos
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Lista e editor de fluxos de automação }
+
+  /admin/analytics:
+    get:
+      tags: [Admin]
+      summary: Analytics Studio — inteligência de negócios
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: KPIs, insights, construtor de relatórios }
+
+  /admin/clientes:
+    get:
+      tags: [Admin]
+      summary: Customer Intelligence — segmentação de participantes
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Lista segmentada de participantes }
+
+  /recompensas:
+    get:
+      tags: [Recompensas]
+      summary: Rewards Engine — pontos, níveis, conquistas, ranking
+      security: [{ cookieAuth: [] }]
+      responses:
+        "200": { description: Perfil de gamificação do participante }
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sb-access-token
+      description: Sessão Supabase (cookie httpOnly).
+
+# Nota: a maior parte da lógica de negócio reside em RPCs do Supabase
+# (security definer). Lista resumida:
+# - get_admin_stats, get_indicator_stats, get_minha_chave_pix
+# - admin_listar_usuarios, admin_listar_indicadores, admin_listar_integracoes
+# - admin_alterar_permissao_usuario, admin_alterar_status_usuario
+# - admin_salvar_integracao, admin_testar_integracao, admin_desconectar_integracao
+# - admin_simular_fluxo
+# - get_meu_perfil_gamificacao, listar_ranking_participantes, listar_niveis, listar_conquistas
+# - request_password_reset (via auth), update password (via auth)
+# Todas exigem sessão autenticada e respeitam RLS/permissões por perfil.
