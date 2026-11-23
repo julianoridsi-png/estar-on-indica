@@ -151,7 +151,7 @@ export default async function AdminDashboardPage(
  : 0;
 
  return (
- <div className="space-y-6">
+ <div className="space-y-6 animate-rise">
  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
  <div>
  <p className="flex items-center gap-1.5 text-[10px] font-bold tracking-[0.16em] text-brand-600 uppercase">

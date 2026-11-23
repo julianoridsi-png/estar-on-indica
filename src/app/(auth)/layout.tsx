@@ -20,7 +20,7 @@ export default async function AuthLayout({
  const settings = await getPublicSettings();
 
  return (
- <div className="grid min-h-dvh lg:grid-cols-[1.02fr_1fr]">
+ <div className="grid min-h-dvh lg:grid-cols-[1.02fr_1fr] animate-rise">
  <aside className="panel-dark relative hidden flex-col justify-between overflow-hidden p-10 text-white lg:flex xl:p-14">
  <div className="relative z-10">
  <Logo
