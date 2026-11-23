@@ -215,7 +215,7 @@ export default function HomePage() {
  />
  <div className="container-page relative grid items-center gap-14 py-14 sm:py-16 lg:grid-cols-[1.04fr_0.96fr] lg:gap-10 lg:py-24">
  <div className="animate-rise">
- <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#f4f5fa] px-3.5 py-1.5 text-[11px] font-bold tracking-wide text-[#31393F] uppercase shadow-sm backdrop-blur-sm">
+ <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1.5 text-[11px] font-bold tracking-wide text-[#31393F] uppercase shadow-soft">
  <Sparkles className="size-3.5 text-[#D2DD3A]" aria-hidden="true" />
  Programa oficial Estar On Internet
  </span>
@@ -232,7 +232,7 @@ export default function HomePage() {
  </p>
 
  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
- <Button asChild size="lg" className="h-13 bg-brand-500 px-7 text-ink hover:bg-brand-400">
+ <Button asChild size="lg" className="h-12 bg-brand-500 px-7 text-ink hover:bg-brand-400">
  <Link href="/cadastro">
  Quero participar
  <ArrowRight className="size-4" aria-hidden="true" />
@@ -242,7 +242,7 @@ export default function HomePage() {
  asChild
  variant="outline"
  size="lg"
- className="h-13 border-white/20 bg-[#f4f5fa] px-6 text-[#31393F] hover:bg-gray-100"
+ className="h-12 border-brand-200 bg-brand-50 px-6 text-[#31393F] hover:bg-brand-50"
  >
  <Link href="/login">
  <LayoutDashboard className="size-4" aria-hidden="true" />
