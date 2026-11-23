@@ -10,6 +10,7 @@ import {
  QrCode,
  Trophy,
  Send,
+ UserRound,
  Users,
  UserCog,
  Wallet,
@@ -42,6 +43,7 @@ const STAFF_ITEMS: NavItem[] = [
 const ADMIN_EXTRA: NavItem[] = [
  { label: "Recompensas", href: "/admin/recompensas", icon: Wallet },
  { label: "Integrações", href: "/admin/integracoes", icon: Plug },
+ { label: "Clientes", href: "/admin/clientes", icon: UserRound },
  { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
  { label: "Automações", href: "/admin/automacoes", icon: Workflow },
  { label: "MFA", href: "/configurar-mfa", icon: ShieldCheck },
