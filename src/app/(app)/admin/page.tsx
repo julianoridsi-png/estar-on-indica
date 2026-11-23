@@ -274,6 +274,17 @@ export default async function AdminDashboardPage(
  />
  </>
  ) : null}
+ <StatCard
+  label="Taxa de conversão"
+  value={
+   stats && stats.total_indicacoes > 0
+    ? `${Math.round((stats.contratos_aprovados / stats.total_indicacoes) * 100)}%`
+    : "—"
+  }
+  description="Contratos aprovados sobre o total de indicações."
+  icon={TrendingUp}
+  tone="emerald"
+ />
  </section>
 
  <div className="grid gap-5 lg:grid-cols-[1.6fr_1fr]">

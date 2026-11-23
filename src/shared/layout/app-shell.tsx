@@ -33,7 +33,11 @@ export function AppShell({
  children: React.ReactNode;
 }) {
  return (
- <div className="min-h-dvh bg-background">
+ <div className="relative min-h-dvh bg-background">
+ <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+  <div className="absolute -top-32 -right-32 size-[30rem] rounded-full bg-brand-500/6 blur-3xl animate-pulse-soft" />
+  <div className="absolute -bottom-32 -left-32 size-[26rem] rounded-full bg-ink/5 blur-3xl" />
+ </div>
  <header className="sticky top-0 z-40 border-b border-border/80 bg-card/90 backdrop-blur-xl">
  <div className="container-page flex h-16 items-center justify-between gap-3">
  <div className="flex min-w-0 items-center gap-3">
@@ -100,7 +104,7 @@ export function AppShell({
 
  <PageTracker />
 
- <main className="container-page py-7 sm:py-9">{children}</main>
+ <main className="relative z-10 container-page py-7 sm:py-9">{children}</main>
  </div>
  );
 }

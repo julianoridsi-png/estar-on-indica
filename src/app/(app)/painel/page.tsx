@@ -24,6 +24,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/alert";
 import { Button } from "@/shared/ui/button";
 import { CopyLinkButton } from "@/shared/ui/copy-link-button";
 import { StatCard } from "@/shared/layout/stat-card";
+import { Progress } from "@/shared/ui/progress";
 import { StatusBadge } from "@/features/indicacoes/components/status-badge";
 import { getCurrentSession } from "@/features/autenticacao/services/current";
 import { getFirstName } from "@/features/autenticacao/services/queries";
@@ -228,6 +229,42 @@ export default async function IndicatorDashboardPage() {
  icon={Gift}
  tone="slate"
  />
+ </section>
+
+ <section aria-label="Progresso das recompensas" className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+  <div className="flex items-center justify-between gap-3">
+   <div>
+    <h2 className="font-heading text-base font-bold text-ink">
+     Progresso das recompensas
+    </h2>
+    <p className="text-[11px] text-muted-foreground">
+     Relação entre recompensas disponíveis e pendentes.
+    </p>
+   </div>
+   <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-semibold text-brand-800 ring-1 ring-brand-200 ring-inset">
+    <Wallet className="size-3" aria-hidden="true" />
+    {stats ? formatNumberBR(stats.recompensas_disponiveis) : "—"} disponíveis
+   </span>
+  </div>
+  <div className="mt-4">
+   <Progress
+    value={
+     stats && (stats.recompensas_disponiveis + stats.recompensas_pendentes) > 0
+      ? Math.round(
+         (stats.recompensas_disponiveis /
+          (stats.recompensas_disponiveis + stats.recompensas_pendentes)) *
+          100,
+        )
+      : 0
+    }
+    className="h-2"
+   />
+  </div>
+  <p className="mt-2 text-[10px] text-muted-foreground">
+   {stats
+    ? `${formatNumberBR(stats.recompensas_disponiveis)} disponíveis de ${formatNumberBR(stats.recompensas_disponiveis + stats.recompensas_pendentes)} registradas.`
+    : "Carregando indicadores..."}
+  </p>
  </section>
 
  <div className="grid gap-5 lg:grid-cols-[1.55fr_1fr]">
