@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
+ Activity,
  ArrowLeft,
  Bell,
  LayoutDashboard,
@@ -53,6 +54,7 @@ const NAV_ITEMS: NavItem[] = [
  { label: "Automações", href: "/admin/automacoes", icon: Workflow, adminOnly: true },
  { label: "Configurar MFA", href: "/configurar-mfa", icon: ShieldCheck, adminOnly: true },
  { label: "Segurança", href: "/admin/seguranca", icon: Shield, adminOnly: true },
+ { label: "Saúde do sistema", href: "/admin/saude", icon: Activity, adminOnly: true },
 ];
 
 function isActive(pathname: string, href: string) {
