@@ -195,7 +195,7 @@ export default function HomePage() {
  <>
  <div className="relative">
  <HeroCarouselServer />
- <section className="hero-glow relative overflow-hidden bg-white">
+ <section className="hero-glow relative overflow-hidden bg-gradient-to-b from-brand-50/50 to-white">
  <div
   aria-hidden="true"
   className="bg-grid absolute inset-0 opacity-40 [mask-image:linear-gradient(to_bottom,black_20%,transparent_92%)]"
@@ -218,14 +218,14 @@ export default function HomePage() {
  <h1 className="mt-6 font-heading text-[2.45rem] leading-[1.05] font-bold text-[#31393F] sm:text-5xl xl:text-[3.6rem]">
  A internet conecta.
  <br />
- <span className="text-brand-300">A Estar On recompensa!</span>
+ <span className="text-brand-600">A Estar On recompensa!</span>
  </h1>
 
- <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-gray-600 sm:text-base">
+ <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-ink/80 sm:text-base">
  Indique o melhor provedor de internet da região e ganhe R$ 50 por
  cada amigo que contratar a Estar On!
  </p>
- <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-bold text-brand-800 shadow-soft">
+ <span className="mt-3 inline-flex items-center gap-2 rounded-full border-2 border-brand-300 bg-brand-50 px-4 py-2 text-sm font-bold text-brand-800 shadow-soft ring-1 ring-brand-200/50">
  <Sparkles className="size-4 text-brand-600" aria-hidden="true" />
  R$ 50 por amigo que contratar
  </span>
@@ -275,7 +275,7 @@ export default function HomePage() {
 
  </div>
 
- <section className="border-y border-border bg-card">
+ <section className="border-y border-brand-200/60 bg-card">
  <div className="container-page grid grid-cols-1 divide-y divide-border sm:grid-cols-2 sm:divide-x lg:grid-cols-4">
  {TRUST_ITEMS.map((item) => {
  const Icon = item.icon;
@@ -301,7 +301,7 @@ export default function HomePage() {
  </div>
  </section>
 
- <section id="como-funciona" className="scroll-mt-24 bg-card py-16 lg:py-24">
+ <section id="como-funciona" className="scroll-mt-24 bg-gradient-to-b from-brand-50/30 to-card py-16 lg:py-24">
  <div className="container-page">
  <div className="mx-auto max-w-2xl text-center">
  <p className="text-xs font-bold tracking-[0.22em] text-brand-600 uppercase">
@@ -475,7 +475,7 @@ export default function HomePage() {
  </div>
  </section>
 
- <section id="recompensas" className="scroll-mt-24 bg-background py-16 lg:py-24">
+ <section id="recompensas" className="scroll-mt-24 bg-gradient-to-b from-background to-brand-50/20 py-16 lg:py-24">
  <div className="container-page grid items-center gap-12 lg:grid-cols-2">
  <div>
  <p className="text-xs font-bold tracking-[0.22em] text-brand-600 uppercase">
@@ -570,7 +570,7 @@ export default function HomePage() {
  </div>
  </section>
 
- <section className="border-y border-border bg-card py-16 lg:py-24">
+ <section className="border-y border-brand-200/60 bg-card py-16 lg:py-24">
  <div className="container-page grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
  <div>
  <p className="text-xs font-bold tracking-[0.22em] text-brand-600 uppercase">
@@ -725,7 +725,7 @@ export default function HomePage() {
  </div>
  </section>
 
- <section className="bg-card pb-16 lg:pb-20">
+ <section className="bg-gradient-to-b from-card to-brand-50/30 pb-16 lg:pb-20">
  <div className="container-page">
  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-ink via-[#31474f] to-[#1b282e] px-6 py-10 shadow-lift sm:px-10 lg:px-14 lg:py-14">
  <div
