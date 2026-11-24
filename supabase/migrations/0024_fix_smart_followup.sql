@@ -110,7 +110,9 @@ declare
   v_job record;
   v_run record;
 begin
-  if not private.is_admin() then
+  -- O SQL Editor e o pg_cron executam sem auth.uid(); nesse caso a rotina e
+  -- permitida. Usuario comum autenticado nao pode ver o diagnostico.
+  if auth.uid() is not null and not private.is_admin() then
     raise exception using errcode = '42501', message = 'ACESSO_NEGADO';
   end if;
 
@@ -149,8 +151,12 @@ begin
 end;
 $$;
 
-grant execute on function public.processar_smart_followup() to authenticated;
-grant execute on function public.saude_cron_status() to authenticated;
+-- Acesso as RPCs: somente usuarios autenticados (admin) e service_role.
+-- O cron roda como postgres e nao depende destes grants.
+revoke execute on function public.processar_smart_followup() from public, anon;
+revoke execute on function public.saude_cron_status() from public, anon;
+grant execute on function public.processar_smart_followup() to authenticated, service_role;
+grant execute on function public.saude_cron_status() to authenticated, service_role;
 
 comment on function public.processar_smart_followup() is
   'Processa alertas de follow-up. Corrigida na 0024 (conflito de alias/variável).';

@@ -59,5 +59,5 @@ group by resolvido
 order by resolvido;
 
 -- 7) Status do agendamento pg_cron (job, agenda, ultima execucao)
---    Rode como admin no SQL Editor; o retorno deve mostrar job_existe = true.
+--    Pode rodar no SQL Editor. O retorno deve mostrar job_existe = true.
 select public.saude_cron_status() as cron_status;
