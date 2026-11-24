@@ -86,12 +86,12 @@ export function AppNav({ tipoUsuario }: { tipoUsuario: TipoUsuario }) {
  className={cn(
  "inline-flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-[12px] font-semibold whitespace-nowrap transition-colors",
  active
- ? "bg-ink text-white shadow-sm"
+ ? "bg-brand-500 text-ink shadow-sm"
  : "text-muted-foreground hover:bg-brand-50 hover:text-ink",
  )}
  >
  <Icon
- className={cn("size-4", active ? "text-brand-400" : "")}
+ className={cn("size-4", active ? "text-ink" : "")}
  aria-hidden="true"
  />
  {item.label}

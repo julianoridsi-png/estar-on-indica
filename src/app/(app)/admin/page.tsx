@@ -184,13 +184,13 @@ export default async function AdminDashboardPage(
       <form action="/admin" method="get" className="flex flex-wrap items-end gap-3 rounded-2xl border border-border bg-card p-4 shadow-soft">
         <div>
           <label className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground uppercase">Data inicial</label>
-          <input type="date" name="inicio" defaultValue="${dataInicio}" className="mt-1 h-9 rounded-lg border border-border bg-card px-3 text-sm" />
+          <input type="date" name="inicio" defaultValue="${dataInicio}" className="mt-1 h-9 rounded-xl border border-border bg-card px-3 text-sm" />
         </div>
         <div>
           <label className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground uppercase">Data final</label>
-          <input type="date" name="fim" defaultValue="${dataFim}" className="mt-1 h-9 rounded-lg border border-border bg-card px-3 text-sm" />
+          <input type="date" name="fim" defaultValue="${dataFim}" className="mt-1 h-9 rounded-xl border border-border bg-card px-3 text-sm" />
         </div>
-        <button type="submit" className="h-9 rounded-lg bg-brand-500 px-4 text-sm font-semibold text-ink hover:bg-brand-400">
+        <button type="submit" className="h-9 rounded-xl bg-brand-500 px-4 text-sm font-semibold text-ink hover:bg-brand-400">
           Filtrar
         </button>
       </form>

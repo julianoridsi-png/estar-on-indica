@@ -24,7 +24,7 @@ export function StatCard({
  tone?: keyof typeof TONES;
 }) {
  return (
- <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift sm:p-5">
+ <div className="relative overflow-hidden rounded-2xl border border-border border-t-2 border-t-brand-400/50 bg-card p-4 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift sm:p-5">
  <div className="flex items-start justify-between gap-3">
  <div className="min-w-0">
  <p className="text-[10px] font-bold tracking-[0.12em] text-muted-foreground uppercase">
