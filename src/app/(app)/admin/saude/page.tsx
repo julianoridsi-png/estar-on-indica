@@ -84,7 +84,7 @@ export default async function SaudePage() {
         supabase.from("beneficios").select("id", { count: "exact", head: true }),
         supabase
           .from("audit_logs")
-          .select("id, tabela, acao, created_at")
+          .select("id, tabela, acao, created_at", { count: "exact" })
           .order("created_at", { ascending: false })
           .limit(5),
         supabase.rpc("saude_cron_status"),
@@ -106,7 +106,7 @@ export default async function SaudePage() {
     beneficiosCount = beneficios.count ?? 0;
 
     auditOk = !audit.error;
-    auditCount = audit.count ?? 0;
+    auditCount = audit.count ?? audit.data?.length ?? 0;
     recentEvents = (audit.data ?? []) as typeof recentEvents;
 
     if (cronResult.error) {
