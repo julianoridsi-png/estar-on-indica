@@ -93,23 +93,15 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-          <h2 className="font-heading text-xl font-bold text-white sm:text-3xl drop-shadow-md">
-            {current.titulo}
-          </h2>
-          {current.descricao ? (
-            <p className="mt-1.5 max-w-xl text-sm text-white/90 sm:text-base">
-              {current.descricao}
-            </p>
-          ) : null}
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center p-5 sm:p-8">
           {current.link_url ? (
             <a
               href={current.link_url}
               target={current.link_url.startsWith("http") ? "_blank" : undefined}
               rel={current.link_url.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-bold text-ink shadow-glow transition-all hover:-translate-y-0.5 hover:bg-brand-400 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-ink shadow-glow transition-all hover:-translate-y-0.5 hover:bg-brand-400 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
             >
-              {current.botao_texto || "Saiba mais"}
+              {current.botao_texto || "Quero participar"}
               <ChevronRight className="size-4" aria-hidden="true" />
             </a>
           ) : null}
@@ -117,11 +109,12 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
       </div>
 
       <div className="sr-only" aria-live="polite" aria-atomic="true">
-        Slide {index + 1} de {count}: {current.titulo}
+        Slide {index + 1} de {count}
       </div>
 
-      {count > 1 ? (
+      {count >= 1 ? (
         <>
+          {count > 1 ? (
           <button
             type="button"
             onClick={prev}
