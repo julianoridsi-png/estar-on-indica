@@ -112,9 +112,8 @@ export function HeroCarousel({ banners }: { banners: Banner[] }) {
         Slide {index + 1} de {count}
       </div>
 
-      {count >= 1 ? (
+      {count > 1 ? (
         <>
-          {count > 1 ? (
           <button
             type="button"
             onClick={prev}
