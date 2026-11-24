@@ -12,7 +12,33 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
+// As variaveis NEXT_PUBLIC_* sao gravadas no bundle do navegador durante o
+// build. O CI nao recebe o .env.local, por isso os valores publicos do projeto
+// ficam como padrao aqui. A chave publishable e publica por natureza e o acesso
+// real e controlado pelas politicas RLS. Para trocar de projeto, defina as
+// variaveis no ambiente do build (elas tem prioridade sobre estes padroes).
+const publicEnv = {
+  NEXT_PUBLIC_SUPABASE_URL:
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    "https://kctrgakxztznbtzitluy.supabase.co",
+  NEXT_PUBLIC_SUPABASE_ANON_KEY:
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    "sb_publishable_lcph5HGXSNhgO_zDOrZeDQ_r2Emrucq",
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    "sb_publishable_lcph5HGXSNhgO_zDOrZeDQ_r2Emrucq",
+  NEXT_PUBLIC_SITE_URL:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://estar-on-indica.julianoridsi.workers.dev",
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY:
+    process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ||
+    "0x4AAAAAAGHdmuHUuGn3_WXT",
+};
+
 const nextConfig: NextConfig = {
+  env: publicEnv,
   poweredByHeader: false,
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   images: {
