@@ -1472,6 +1472,8 @@ begin
   into v_job
   from cron.job
   where jobname = 'estar-on-smart-followup'
+     or command ilike '%processar_smart_followup%'
+  order by (jobname = 'estar-on-smart-followup') desc
   limit 1;
 
   if v_job.jobid is null then
